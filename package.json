@@ -7,7 +7,15 @@
     "dev": "vite --port 5173",
     "build": "vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "pm2:start": "pm2 start node_modules/vite/bin/vite.js --name clone-project-front",
+    "pm2:stop": "pm2 stop clone-project-front",
+    "pm2:restart": "pm2 restart clone-project-front",
+    "pm2:delete": "pm2 delete clone-project-front",
+    "pm2:log": "pm2 logs",
+    "pm2:status": "pm2 status",
+    "pm2:which": "which pm2",
+    "pm2:list": "pm2 list"
   },
   "lint-staged": {
     "*.{js,ts,vue}": [
@@ -23,6 +31,7 @@
     "bootstrap": "^5.3.5",
     "date-fns": "^4.1.0",
     "pinia": "^3.0.2",
+    "pm2": "^6.0.5",
     "router": "^2.2.0",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
