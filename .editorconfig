@@ -1,0 +1,9 @@
+[*.{js,jsx,mjs,cjs,ts,tsx,mts,cts,vue,css,scss,sass,less,styl}] # 적용할 파일 확장자 목록
+charset = utf-8 # 파일 인코딩을 UTF-8로 설정
+indent_size = 2 # 들여쓰기 크기를 2칸으로 설정
+indent_style = space # 들여쓰기 방식을 스페이스로 설정
+insert_final_newline = true # 파일 끝에 빈 줄 추가
+trim_trailing_whitespace = true # 줄 끝의 불필요한 공백 제거
+
+end_of_line = lf # 줄바꿈 문자를 LF(Line Feed)로 통일
+max_line_length = 100 # 한 줄의 최대 길이를 100자로 제한
