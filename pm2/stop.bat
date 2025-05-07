@@ -1,0 +1,6 @@
+@echo off
+echo Stopping naverCloneProjectFront...
+call npm run pm2:stop
+echo.
+echo Press any key to exit...
+pause > nul 
