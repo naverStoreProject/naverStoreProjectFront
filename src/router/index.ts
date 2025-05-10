@@ -17,6 +17,7 @@ const routes: RouteRecordRaw[] = [
         path: 'search',
         name: 'search',
         component: () => import('@/pages/search/SearchPage.vue'),
+        meta: { useHeader: false },
       },
       {
         path: 'login',
@@ -37,6 +38,7 @@ const routes: RouteRecordRaw[] = [
         path: 'category',
         name: 'category',
         component: () => import('@/pages/category/CategoryPage.vue'),
+        meta: { useHeader: false },
       },
       {
         path: 'product-list',
@@ -57,6 +59,7 @@ const routes: RouteRecordRaw[] = [
       },
       {
         path: 'user',
+        name: 'user',
         component: () => import('@/pages/user/MypagePage.vue'),
         children: [
           {

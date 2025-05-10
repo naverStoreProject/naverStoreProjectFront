@@ -1,9 +1,110 @@
 <template>
-  <header class="p-4 bg-gray-100 shadow">
-    <RouterLink to="/" class="text-xl font-bold">🏠 헤더</RouterLink>
+  <header>
+    <div class="flex justify-between">
+      <div class="header-left">
+        <div v-if="menuList.back">
+          <img src="" alt="back" />
+        </div>
+        <div v-if="menuList.mainLogo">
+          <img src="" alt="logo" />
+        </div>
+        <div v-if="menuList.mainTitle">
+          <div v-text="mainTitle"></div>
+        </div>
+      </div>
+      <!-- header-left end -->
+
+      <div class="header-right">
+        <div v-if="menuList.alarm" class="header-right__alarm">
+          <img src="" alt="alarm" />
+        </div>
+        <div v-if="menuList.setting" class="header-right__alarm">
+          <img src="" alt="setting" />
+        </div>
+        <div v-if="menuList.basket" class="header-right__basket">
+          <img src="" alt="basket" />
+        </div>
+      </div>
+      <!-- header-right end -->
+    </div>
   </header>
 </template>
 
 <script setup lang="ts">
-import { RouterLink } from 'vue-router'
+import { useRoute } from 'vue-router'
+import { ref, watch } from 'vue'
+
+const route = useRoute()
+
+//기본 항목들 표기
+const menuList = ref({
+  back: false,
+  mainLogo: false,
+  mainTitle: false,
+  alarm: false,
+  setting: false,
+  basket: false,
+})
+
+//메인로고자리 대체 문자
+const mainTitle = ref('')
+const mainTitleList = ref({
+  user: '마이쇼핑',
+  setting: '설정',
+})
+
+//route 에 따라 필요한 항목만 표기
+//신규 메뉴 추가될때마다 수정
+const routerList = {
+  home: ['mainLogo', 'alarm', 'basket'],
+  user: ['mainTitle', 'alarm', 'setting', 'basket'],
+}
+
+//헤더 리셋
+const resetHeader = () => {
+  Object.keys(menuList.value).forEach(key => {
+    menuList.value[key as keyof typeof menuList.value] = false
+  })
+
+  mainTitle.value = ''
+}
+
+//route 경로에 따라 항목 표기해주기
+const changeHeader = (name: string = 'home') => {
+  console.log(name)
+  const selectedMenuList = routerList[name as keyof typeof routerList]
+  console.log(selectedMenuList)
+  selectedMenuList.forEach(menu => {
+    console.log(menuList.value[menu as keyof typeof menuList.value])
+    menuList.value[menu as keyof typeof menuList.value] = true
+  })
+}
+
+//메인로고쓸지 타이틀을 쓸지
+const checkMainTitle = (name: string = 'home') => {
+  const title = mainTitleList.value[name as keyof typeof mainTitleList.value]
+  if (title) {
+    mainTitle.value = title
+  } else {
+    mainTitle.value = ''
+  }
+}
+
+//route가 바뀔때마다 실행
+watch(
+  () => route.name,
+  newName => {
+    resetHeader()
+    changeHeader(newName as string)
+    checkMainTitle(newName as string)
+  },
+  { immediate: true }
+)
 </script>
+
+<style>
+.header-right {
+  display: flex;
+  gap: 1rem;
+}
+</style>
