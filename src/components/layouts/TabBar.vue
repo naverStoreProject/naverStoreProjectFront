@@ -6,7 +6,7 @@
           <img src="" alt="" />
         </div>
         <div>
-          <div v-text="bnlist.name"></div>
+          <div v-text="bnlist.name" class="text-xs"></div>
         </div>
       </RouterLink>
     </template>
@@ -40,7 +40,9 @@ const bottomNavList = [
 .bottom-nav__button {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: center;
-  margin: auto 0;
+  max-width: 2.5rem;
+  width:100%;
 }
 </style>
