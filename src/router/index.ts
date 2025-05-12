@@ -9,9 +9,46 @@ const routes: RouteRecordRaw[] = [
     component: AppLayout,
     children: [
       {
-        path: '',
+        path: '/',
         name: 'home',
         component: () => import('@/pages/home/HomePage.vue'),
+        children: [
+          {
+            path: '/',
+            name: 'main-home',
+            component: () => import('@/pages/home/_components/HomeMain.vue'),
+          },
+          {
+            path: 'deal',
+            name: 'deal-home',
+            component: () => import('@/pages/home/_components/TodayDeal.vue'),
+          },
+          {
+            path: 'for-you',
+            name: 'for-you-home',
+            component: () => import('@/pages/home/_components/ForYou.vue'),
+          },
+          {
+            path: 'best',
+            name: 'best-home',
+            component: () => import('@/pages/home/_components/ForYou.vue'),
+          },
+          {
+            path: 'delivery',
+            name: 'delivery-home',
+            component: () => import('@/pages/home/_components/ForYou.vue'),
+          },
+          {
+            path: 'fashion',
+            name: 'fashion-home',
+            component: () => import('@/pages/home/_components/ForYou.vue'),
+          },
+          {
+            path: 'sale',
+            name: 'sale-home',
+            component: () => import('@/pages/home/_components/ForYou.vue'),
+          },
+        ],
       },
       {
         path: 'search',

@@ -1,9 +1,9 @@
 <template>
   <header>
-    <div class="flex justify-between">
+    <div class="flex justify-between p-3">
       <div class="header-left">
         <div v-if="menuList.back">
-          <img src="" alt="back" />
+          <i class="fa-solid fa-arrow-left"></i>
         </div>
         <div v-if="menuList.mainLogo">
           <img src="" alt="logo" />
@@ -16,13 +16,13 @@
 
       <div class="header-right">
         <div v-if="menuList.alarm" class="header-right__alarm">
-          <img src="" alt="alarm" />
+          <i class="fa-regular fa-bell"></i>
         </div>
         <div v-if="menuList.setting" class="header-right__alarm">
-          <img src="" alt="setting" />
+          <i class="fa-solid fa-gear"></i>
         </div>
         <div v-if="menuList.basket" class="header-right__basket">
-          <img src="" alt="basket" />
+          <i class="fa-solid fa-bag-shopping"></i>
         </div>
       </div>
       <!-- header-right end -->
@@ -33,9 +33,11 @@
 <script setup lang="ts">
 import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
+import routeUtil from '@/utils/route'
 
 const route = useRoute()
 
+/* 페이지 추가시 수정해야하는 항목들 start */
 //기본 항목들 표기
 const menuList = ref({
   back: false,
@@ -54,11 +56,11 @@ const mainTitleList = ref({
 })
 
 //route 에 따라 필요한 항목만 표기
-//신규 메뉴 추가될때마다 수정
 const routerList = {
   home: ['mainLogo', 'alarm', 'basket'],
-  user: ['mainTitle', 'alarm', 'setting', 'basket'],
+  user: ['back', 'mainTitle', 'alarm', 'setting', 'basket'],
 }
+/* 페이지 추가시 수정해야하는 항목들 end */
 
 //헤더 리셋
 const resetHeader = () => {
@@ -71,11 +73,8 @@ const resetHeader = () => {
 
 //route 경로에 따라 항목 표기해주기
 const changeHeader = (name: string = 'home') => {
-  console.log(name)
   const selectedMenuList = routerList[name as keyof typeof routerList]
-  console.log(selectedMenuList)
   selectedMenuList.forEach(menu => {
-    console.log(menuList.value[menu as keyof typeof menuList.value])
     menuList.value[menu as keyof typeof menuList.value] = true
   })
 }
@@ -94,15 +93,24 @@ const checkMainTitle = (name: string = 'home') => {
 watch(
   () => route.name,
   newName => {
+    //부모구하기
+    const parent = routeUtil.getParent(route, route.name as string)
+    const routeName = parent ? parent.name : newName
+
+    //페이징 시작
     resetHeader()
-    changeHeader(newName as string)
-    checkMainTitle(newName as string)
+    changeHeader(routeName as string)
+    checkMainTitle(routeName as string)
   },
   { immediate: true }
 )
 </script>
 
 <style>
+.header-left {
+  display: flex;
+  gap: 1rem;
+}
 .header-right {
   display: flex;
   gap: 1rem;
