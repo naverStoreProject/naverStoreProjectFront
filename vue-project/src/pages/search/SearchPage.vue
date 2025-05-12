@@ -2,6 +2,6 @@
   <div>search page</div>
 </template>
 
-<script setup>
+<script>
 // script part
 </script>
