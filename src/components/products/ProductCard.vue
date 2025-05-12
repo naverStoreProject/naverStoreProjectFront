@@ -23,8 +23,8 @@ defineProps<{
     tag?: string
     image: string
   }
+  viewType: 'list' | 'grid-2' | 'grid-3'
 }>()
-
 
 </script>
 
