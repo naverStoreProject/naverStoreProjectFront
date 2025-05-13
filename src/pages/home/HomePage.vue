@@ -1,6 +1,6 @@
 <template>
   <div class="p-4 space-y-2">
-    <h1 class="text-xl font-bold mb-4">📌 라우트 링크 목록</h1>
+    <h1 class="text-xl font-gmarket-700 mb-4">📌 라우트 링크 목록</h1>
     <ul class="space-y-1 text-blue-500 underline">
       <li><RouterLink :to="{ name: 'mypage' }">마이페이지</RouterLink></li>
       <li><RouterLink :to="{ name: 'search' }">검색</RouterLink></li>

@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      'px-4 py-2 rounded font-semibold text-red-400',
+      'px-4 py-2 rounded font-gmarket-700 text-red-400',
       variantClass,
       disabled ? 'opacity-50 cursor-not-allowed' : '',
     ]"
