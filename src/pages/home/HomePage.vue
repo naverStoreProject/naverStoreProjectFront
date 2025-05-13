@@ -1,4 +1,5 @@
 <template>
+  <Header :menu="'home'" />
   <div>
     <!-- 검색창 (임시)-->
     <div class="temp-search">
@@ -9,7 +10,7 @@
       />
     </div>
 
-    <!-- 라우터 -->
+    <!-- 홈 상단 네비게이션 -->
     <HomeNav />
 
     <RouterView> </RouterView>
@@ -17,7 +18,11 @@
 </template>
 
 <script setup lang="ts">
+import Header from '@/components/layouts/header/Header.vue'
 import HomeNav from '@/pages/home/_components/HomeNav.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
 
 <style>

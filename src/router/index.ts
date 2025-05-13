@@ -31,22 +31,22 @@ const routes: RouteRecordRaw[] = [
           {
             path: 'best',
             name: 'best-home',
-            component: () => import('@/pages/home/_components/ForYou.vue'),
+            component: () => import('@/pages/home/_components/BestItem.vue'),
           },
           {
             path: 'delivery',
             name: 'delivery-home',
-            component: () => import('@/pages/home/_components/ForYou.vue'),
+            component: () => import('@/pages/home/_components/Delivery.vue'),
           },
           {
             path: 'fashion',
             name: 'fashion-home',
-            component: () => import('@/pages/home/_components/ForYou.vue'),
+            component: () => import('@/pages/home/_components/FashionBeauty.vue'),
           },
           {
             path: 'sale',
             name: 'sale-home',
-            component: () => import('@/pages/home/_components/ForYou.vue'),
+            component: () => import('@/pages/home/_components/TodaySale.vue'),
           },
         ],
       },

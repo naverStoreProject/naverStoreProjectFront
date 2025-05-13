@@ -23,6 +23,7 @@ const homeRouterNavs = [
 </script>
 
 <style>
+/* scrollbar 는 공통 css로 이동해야함 */
 .scrollbar-none {
   -ms-overflow-style: none; /* IE, Edge */
   scrollbar-width: none; /* Firefox */
