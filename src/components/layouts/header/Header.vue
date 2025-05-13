@@ -31,36 +31,26 @@
 </template>
 
 <script setup lang="ts">
+/* 
+  헤더는 두가지 방식으로 가져옴
+  1. 라우터가 바뀌었을때, 라우터 path 값에 따라 가져옴
+  2. 특정 path값을 props 를 통해 주입시켰을때 (우선)
+*/
 import { useRoute } from 'vue-router'
 import { ref, watch } from 'vue'
 import routeUtil from '@/utils/route'
 
+import type { routeType } from './header'
+import { menuList, mainTitleList, routerList } from './header'
+
 const route = useRoute()
 
-/* 페이지 추가시 수정해야하는 항목들 start */
-//기본 항목들 표기
-const menuList = ref({
-  back: false,
-  mainLogo: false,
-  mainTitle: false,
-  alarm: false,
-  setting: false,
-  basket: false,
-})
-
-//메인로고자리 대체 문자
 const mainTitle = ref('')
-const mainTitleList = ref({
-  user: '마이쇼핑',
-  setting: '설정',
-})
 
-//route 에 따라 필요한 항목만 표기
-const routerList = {
-  home: ['mainLogo', 'alarm', 'basket'],
-  user: ['back', 'mainTitle', 'alarm', 'setting', 'basket'],
-}
-/* 페이지 추가시 수정해야하는 항목들 end */
+//header 강제
+const props = defineProps<{
+  menu: routeType
+}>()
 
 //헤더 리셋
 const resetHeader = () => {
@@ -92,10 +82,18 @@ const checkMainTitle = (name: string = 'home') => {
 //route가 바뀔때마다 실행
 watch(
   () => route.name,
-  newName => {
-    //부모구하기
-    const parent = routeUtil.getParent(route, route.name as string)
-    const routeName = parent ? parent.name : newName
+  _ => {
+    let routeName: string
+
+    //header 강제설정이면 이대로
+    if (props.menu) {
+      routeName = props.menu
+    }
+    //아니면 부모구하기
+    else {
+      const parent = routeUtil.getParent(route, route.name as string)
+      routeName = typeof parent?.name === 'string' ? parent.name : 'home'
+    }
 
     //페이징 시작
     resetHeader()

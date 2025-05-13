@@ -8,6 +8,7 @@
   </div>
 
   <!-- 카테고리 네비게이션 -->
+  <MainShortcutBar />
 
   <!-- 컨텐츠들 -->
 </template>
@@ -16,6 +17,7 @@
 import { ref } from 'vue'
 
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
+import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
 
 //임시 로그인
 const isLogin = true
