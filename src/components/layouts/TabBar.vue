@@ -1,7 +1,48 @@
 <template>
-  <div class="fixed bottom-0 left-0 w-full bg-white border-t p-4 text-center shadow">tab bar</div>
+  <div class="bottom-nav">
+    <template v-for="bnlist in bottomNavList">
+      <RouterLink :to="{ name: bnlist.router }" class="bottom-nav__button">
+        <div class="bottom-nav__icon">
+          <img src="" alt="" />
+        </div>
+        <div>
+          <div v-text="bnlist.name" class="text-xs"></div>
+        </div>
+      </RouterLink>
+    </template>
+  </div>
+  <!-- bottom-nav end -->
 </template>
 
-<script setup>
-// script part
+<script setup lang="ts">
+//bottom-nav 리스트
+const bottomNavList = [
+  { name: '홈', router: 'home', src: '' },
+  { name: '발견', router: 'home', src: '' },
+  { name: '카테고리', router: 'category', src: '' },
+  { name: '검색', router: 'search', src: '' },
+  { name: '마이쇼핑', router: 'user', src: '' },
+]
 </script>
+
+<style>
+.bottom-nav {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  background-color: var(--color-gray-200);
+  height: 5rem;
+  padding: 0rem 2rem 0rem 2rem;
+}
+.bottom-nav__button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  max-width: 2.5rem;
+  width:100%;
+}
+</style>

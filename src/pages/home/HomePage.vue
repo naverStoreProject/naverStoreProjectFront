@@ -1,24 +1,32 @@
 <template>
-  <div class="p-4 space-y-2">
-    <h1 class="text-xl font-gmarket-700 mb-4">📌 라우트 링크 목록</h1>
-    <ul class="space-y-1 text-blue-500 underline">
-      <li><RouterLink :to="{ name: 'mypage' }">마이페이지</RouterLink></li>
-      <li><RouterLink :to="{ name: 'search' }">검색</RouterLink></li>
-      <li><RouterLink :to="{ name: 'login' }">로그인</RouterLink></li>
-      <li><RouterLink :to="{ name: 'cart' }">장바구니</RouterLink></li>
-      <li><RouterLink :to="{ name: 'event' }">이벤트</RouterLink></li>
-      <li><RouterLink :to="{ name: 'category' }">카테고리</RouterLink></li>
-      <li><RouterLink :to="{ name: 'product-list' }">상품 리스트</RouterLink></li>
-      <li>
-        <RouterLink :to="{ name: 'product-item', params: { itemId: 123 } }">상품 디테일</RouterLink>
-      </li>
-      <li>
-        <RouterLink :to="{ name: 'item-review', params: { itemId: 123 } }">상품 리뷰</RouterLink>
-      </li>
-    </ul>
+  <Header :menu="'home'" />
+  <div>
+    <!-- 검색창 (임시)-->
+    <div class="temp-search">
+      <input
+        type="text"
+        placeholder="검색"
+        class="border border-gray-300 rounded px-3 py-2 w-full"
+      />
+    </div>
+
+    <!-- 홈 상단 네비게이션 -->
+    <HomeNav />
+
+    <RouterView> </RouterView>
   </div>
 </template>
 
 <script setup lang="ts">
-// 필요 시 script 추가
+import Header from '@/components/layouts/header/Header.vue'
+import HomeNav from '@/pages/home/_components/HomeNav.vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
 </script>
+
+<style>
+.temp-search {
+  padding: 1rem;
+}
+</style>
