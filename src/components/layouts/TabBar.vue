@@ -43,6 +43,6 @@ const bottomNavList = [
   justify-content: center;
   text-align: center;
   max-width: 2.5rem;
-  width:100%;
+  width: 100%;
 }
 </style>

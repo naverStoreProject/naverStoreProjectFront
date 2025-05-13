@@ -1,9 +1,9 @@
 <template>
   <button
     :class="[
-      'px-4 py-2 rounded font-gmarket-700 text-red-400',
+      'font-gmarket-700 rounded px-4 py-2 text-red-400',
       variantClass,
-      disabled ? 'opacity-50 cursor-not-allowed' : '',
+      disabled ? 'cursor-not-allowed opacity-50' : '',
     ]"
     :disabled="disabled"
     @click="onClick"

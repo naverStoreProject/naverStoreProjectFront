@@ -9,7 +9,6 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
 import { products } from './tmpProductData.ts'

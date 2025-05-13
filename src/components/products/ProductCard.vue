@@ -25,7 +25,6 @@ defineProps<{
   }
   viewType: 'list' | 'grid-2' | 'grid-3'
 }>()
-
 </script>
 
 <style scoped>
