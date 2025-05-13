@@ -10,15 +10,26 @@ Git의 커밋은 아래와 같습니다.
 **참고**<br>
 [Conventional Commit](https://www.conventionalcommits.org/en/v1.0.0/)
 
-**주요 커밋 타입**<br>
+**주요 브랜치 커밋 규칙**<br>
 
-- `feat`: 새로운 기능 추가
-- `fix`: 버그 수정
-- `docs`: 문서 관련 변경
-- `style`: 코드 스타일 변경 (포맷팅, 세미콜론 등)
-- `refactor`: 코드 리팩토링
-- `test`: 테스트 코드 추가/수정
-- `chore`: 빌드 프로세스나 보조 도구 변경
+⚡️ 🚨 📝 ♻️ 🎨 🙈 🩹
+
+**branch 생성 규칙.**<br>
+⚡️feature/이슈번호/제목orPage(날짜) <br>
+🚨bug/이슈번호/제목orPage(날짜) <br>
+♻️refactor/이슈번호/제목orPage(날짜) <br>
+🎨design/이슈번호/제목orPage(날짜) <br>
+📝docs/이슈번호/제목orPage(날짜) <br>
+🩹fix/이슈번호/제목orPage(날짜) <br>
+
+**commit 규칙.**<br>
+⚡️feat: 새로운 기능추가 내용 #이슈번호 <br>
+🚨bug: 버그 수정 내용 #이슈번호 <br>
+📝docs: 문서 관련 변경 #이슈번호 <br>
+🎨design: 디자인 내용 #이슈번호 <br>
+♻️refactor: 리펙토링 내용 #이슈번호 <br>
+🙈test: 테스트 코드 내용 #이슈번호 <br>
+🩹fix: 고친 내용 #이슈번호 <br>
 
 **2. CSS**<br>
 
