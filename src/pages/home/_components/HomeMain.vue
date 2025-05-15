@@ -14,8 +14,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
-
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
 

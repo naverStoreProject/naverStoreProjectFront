@@ -1,27 +1,31 @@
 <template>
   <header>
     <div class="flex justify-between p-3">
-      <div class="header-left">
-        <div v-if="menuList.back">
+      <div class="header-left text-xl">
+        <div v-if="routeMenuList.back" @click="backBtnFunc">
           <i class="fa-solid fa-arrow-left"></i>
         </div>
-        <div v-if="menuList.mainLogo">
+        <div v-if="routeMenuList.mainLogo">
           <img src="" alt="logo" />
         </div>
-        <div v-if="menuList.mainTitle">
+        <div v-if="routeMenuList.mainTitle">
           <div v-text="mainTitle"></div>
         </div>
       </div>
       <!-- header-left end -->
 
-      <div class="header-right">
-        <div v-if="menuList.alarm" class="header-right__alarm">
+      <div class="header-right text-xl">
+        <div
+          v-if="routeMenuList.alarm"
+          class="header-right__alarm"
+          @click="offcanvasStore.open('alarm')"
+        >
           <i class="fa-regular fa-bell"></i>
         </div>
-        <div v-if="menuList.setting" class="header-right__alarm">
+        <div v-if="routeMenuList.setting" class="header-right__alarm">
           <i class="fa-solid fa-gear"></i>
         </div>
-        <div v-if="menuList.basket" class="header-right__basket">
+        <div v-if="routeMenuList.basket" class="header-right__basket">
           <i class="fa-solid fa-bag-shopping"></i>
         </div>
       </div>
@@ -31,21 +35,36 @@
 </template>
 
 <script setup lang="ts">
-/* 
+/*
   헤더는 두가지 방식으로 가져옴
   1. 라우터가 바뀌었을때, 라우터 path 값에 따라 가져옴
   2. 특정 path값을 props 를 통해 주입시켰을때 (우선)
 */
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import { ref, watch } from 'vue'
 import routeUtil from '@/utils/route'
 
 import type { routeType } from './header'
 import { menuList, mainTitleList, routerList } from './header'
 
-const route = useRoute()
+import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
+const route = useRoute()
+const router = useRouter()
+const offcanvasStore = useOffcanvasStore()
 const mainTitle = ref('')
+const routeMenuList = ref({ ...menuList })
+const routeMainTitleList = ref({ ...mainTitleList })
+
+//뒤로가기 버튼 설정
+const backBtnFunc = () => {
+  //오프캔버스면 창닫기
+  if (offcanvasStore.stack.length > 0) {
+    offcanvasStore.close()
+  } else {
+    router.back()
+  }
+}
 
 //header 강제
 const props = defineProps<{
@@ -54,8 +73,8 @@ const props = defineProps<{
 
 //헤더 리셋
 const resetHeader = () => {
-  Object.keys(menuList.value).forEach(key => {
-    menuList.value[key as keyof typeof menuList.value] = false
+  Object.keys(routeMenuList.value).forEach(key => {
+    routeMenuList.value[key as keyof typeof menuList] = false
   })
 
   mainTitle.value = ''
@@ -65,13 +84,13 @@ const resetHeader = () => {
 const changeHeader = (name: string = 'home') => {
   const selectedMenuList = routerList[name as keyof typeof routerList]
   selectedMenuList.forEach(menu => {
-    menuList.value[menu as keyof typeof menuList.value] = true
+    routeMenuList.value[menu as keyof typeof menuList] = true
   })
 }
 
 //메인로고쓸지 타이틀을 쓸지
 const checkMainTitle = (name: string = 'home') => {
-  const title = mainTitleList.value[name as keyof typeof mainTitleList.value]
+  const title = routeMainTitleList.value[name as keyof typeof mainTitleList]
   if (title) {
     mainTitle.value = title
   } else {
