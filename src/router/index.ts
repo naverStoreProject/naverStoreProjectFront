@@ -75,13 +75,22 @@ const routes: RouteRecordRaw[] = [
         path: 'category',
         name: 'category',
         component: () => import('@/pages/category/CategoryPage.vue'),
-        meta: { useHeader: false },
+        meta: { useHeader: true },
       },
+
+      {
+        path: '/category/:categoryId/:subCategoryId',
+        name: 'category-detail',
+        component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
+        meta: { useHeader: true },
+      },
+
       {
         path: 'product-list',
         name: 'product-list',
         component: () => import('@/pages/product/ProductListPage.vue'),
       },
+
       {
         path: 'product-item/:itemId',
         name: 'product-item',
