@@ -1,4 +1,4 @@
-import BaseButton from '../components/atoms/BaseBtn.vue'
+import BaseButton from '@/components/atoms/BaseBtn.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
 const meta: Meta<typeof BaseButton> = {
