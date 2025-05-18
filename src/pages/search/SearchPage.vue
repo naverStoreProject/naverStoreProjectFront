@@ -10,10 +10,7 @@
         <button @click="toggleViewType">그리드 모양</button>
       </div>
     </header>
-
     <ProductList :view-type="viewType" />
-
-
   </div>
 </template>
 

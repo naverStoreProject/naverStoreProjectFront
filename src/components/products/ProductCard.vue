@@ -2,7 +2,6 @@
   <div :class="['product-card', viewType]" v-if="product">
     <img :src="product.image" alt="이미지 없음" />
     <div class="product-info">
-
       <div class="meta-row">
         <template v-if="viewType === 'small'">
           <p class="tag-name-line">
@@ -19,7 +18,6 @@
           <p class="name">{{ product.name }}</p>
         </template>
       </div>
-
 
       <p class="price" v-if="product.originalPrice">
         <span v-if="viewType !== 'small'" class="my-price">나의 할인가 </span>
