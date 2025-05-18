@@ -1,8 +1,12 @@
 {
-  "semi": false,
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "arrowParens": "avoid",
-  "printWidth": 100,
-  "$schema": "https://json.schemastore.org/prettierrc"
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "arrowParens": "avoid",
+    "printWidth": 100,
+    "endOfLine": "lf",
+    "$schema": "https://json.schemastore.org/prettierrc",
+    "plugins": ["prettier-plugin-tailwindcss"],
+    "tailwindConfig": "./tailwind.config.js"
 }

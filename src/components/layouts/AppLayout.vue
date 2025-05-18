@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col min-h-screen ">
-    <main class="flex-1 pb-20 relative ...">
+  <div class="flex min-h-screen flex-col">
+    <main class="relative flex-1 pb-20 ...">
       <!-- <Header v-if="route.meta.useHeader !== false" /> -->
       <RouterView />
       <TabBar />

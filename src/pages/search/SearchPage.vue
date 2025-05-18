@@ -13,13 +13,7 @@
 
     <ProductList :view-type="viewType" />
 
-    <nav class="bottom-nav">
-      <button>홈</button>
-      <button>발견</button>
-      <button>카테고리</button>
-      <button>검색</button>
-      <button>마이쇼핑</button>
-    </nav>
+
   </div>
 </template>
 
@@ -27,10 +21,10 @@
 import ProductList from '@/components/products/ProductList.vue'
 import { ref } from 'vue'
 
-const viewTypes = ['list', 'grid-2', 'grid-3'] as const
-type ViewType = typeof viewTypes[number]
+const viewTypes = ['long', 'middle', 'small'] as const
+type ViewType = (typeof viewTypes)[number]
 
-const viewType = ref<ViewType>('grid-2')
+const viewType = ref<ViewType>('middle')
 
 function toggleViewType() {
   const currentIndex = viewTypes.indexOf(viewType.value)
@@ -41,8 +35,10 @@ function toggleViewType() {
 
 <style scoped>
 .container {
+  /*
   width: 960px;
   padding-bottom: 70px;
+   */
   font-family: 'Noto Sans KR', sans-serif;
 }
 
@@ -66,22 +62,4 @@ function toggleViewType() {
   font-size: 14px;
 }
 
-.bottom-nav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: #fff;
-  border-top: 1px solid #eee;
-  display: flex;
-  justify-content: space-around;
-  padding: 10px 0;
-}
-
-.bottom-nav button {
-  background: none;
-  border: none;
-  font-size: 12px;
-  color: #333;
-}
 </style>

@@ -3,19 +3,18 @@
     <ProductCard
       v-for="(product, index) in products"
       :key="index"
-      :product="product"
+      :product-id="product.id"
       :view-type="viewType"
     />
   </div>
 </template>
 
-
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
-import { products } from './tmpProductData.ts'
+import { products } from './productData.ts'
 
 defineProps<{
-  viewType: 'list' | 'grid-2' | 'grid-3'
+  viewType: 'long' | 'middle' | 'small'
 }>()
 </script>
 
@@ -23,25 +22,29 @@ defineProps<{
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  gap: 0px;
+  justify-content: space-evenly;
   padding: 16px 0;
 }
 
-.products.grid-2 > * {
+.products.middle > * {
+
   width: 45%;
 }
 
-.products.grid-3 > * {
+
+.products.small > * {
+
   width: 30%;
 }
 
-.products.list {
+.products.long {
   flex-direction: column;
   align-items: center;
+  height: 18%;
 }
 
-.products.list > * {
+.products.long > * {
   width: 100%;
   max-width: 900px;
 }
