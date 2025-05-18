@@ -36,16 +36,17 @@
 </template>
 
 <script setup lang="ts">
+import type { Product } from './productData.ts'
 import { products } from './productData.ts'
 import { computed } from 'vue'
 
 const props = defineProps<{
-  productId: string
+  product: Product
   viewType: 'long' | 'middle' | 'small'
 }>()
 
-const product = computed(() => products.find((p) => p.id === props.productId)
-)
+// const product = computed(() => products.find((p) => p.id === props.productId)
+// )
 
 </script>
 

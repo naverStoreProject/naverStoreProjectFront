@@ -1,9 +1,9 @@
 <template>
   <div :class="['products', viewType]">
     <ProductCard
-      v-for="(product, index) in products"
-      :key="index"
-      :product-id="product.id"
+      v-for="product in products"
+      :key="product.id"
+      :product="product"
       :view-type="viewType"
     />
   </div>
