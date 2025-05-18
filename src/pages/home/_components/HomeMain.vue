@@ -11,6 +11,10 @@
   <MainShortcutBar />
 
   <!-- 컨텐츠들 -->
+  <HomeInterest />
+
+  <HomeTodaySale/>
+
 </template>
 
 <script setup>
@@ -18,6 +22,8 @@ import { ref } from 'vue'
 
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
+import HomeInterest from './HomeInterest.vue'
+import HomeTodaySale from './HomeTodaySale.vue'
 
 //임시 로그인
 const isLogin = true
