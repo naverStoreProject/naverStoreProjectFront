@@ -27,7 +27,7 @@ const bottomNavList = [
 
 <style>
 .bottom-nav {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

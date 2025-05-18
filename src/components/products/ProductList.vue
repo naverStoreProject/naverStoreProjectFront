@@ -22,19 +22,15 @@ defineProps<{
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 0px;
   justify-content: space-evenly;
-  padding: 16px 0;
+  padding: 2rem 0;
 }
 
 .products.middle > * {
-
   width: 45%;
 }
 
-
 .products.small > * {
-
   width: 30%;
 }
 
