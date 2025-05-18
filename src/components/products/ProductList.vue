@@ -23,8 +23,10 @@ defineProps<{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
-  padding: 2rem 0;
+  padding: 1rem 0.5rem;
 }
+
+
 
 .products.middle > * {
   width: 45%;
@@ -37,7 +39,7 @@ defineProps<{
 .products.long {
   flex-direction: column;
   align-items: center;
-  height: 18%;
+  height: 20%;
 }
 
 .products.long > * {
