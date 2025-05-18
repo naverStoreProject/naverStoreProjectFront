@@ -20,6 +20,10 @@
 }
 
 @layer base {
+  html {
+    font-size: 16px;
+  }
+
   * {
     font-size: var(--text-sm); /* 14px */
     color: var(--color-surface-950);

@@ -1,9 +1,10 @@
-import BaseButton from '@/components/atoms/BaseBtn.vue'
+import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta: Meta<typeof BaseButton> = {
-  title: 'UI/BaseButton',
-  component: BaseButton,
+const meta: Meta<typeof BaseBtn> = {
+  title: 'UI/BaseBtn',
+  component: BaseBtn,
+  tags: ['autodocs'],
   args: {
     label: 'BaseBtn',
     size: 'md',
@@ -24,26 +25,17 @@ const meta: Meta<typeof BaseButton> = {
       options: ['full', 'lg', 'square'],
     },
   },
+  parameters: {
+    // Docs탭에서 Props 조작
+    controls: { expanded: true },
+    previewTabs: {
+      'storybook/docs/panel': { hidden: false }, // Docs 탭 보이기
+      canvas: { hidden: true }, // Canvas(스토리 리스트) 숨기기
+    },
+  },
 }
 export default meta
 
-export const Primary: StoryObj<typeof BaseButton> = {
-  args: {
-    label: 'Primary',
-    color: 'primary',
-  },
-}
+type Story = StoryObj<typeof BaseBtn>
 
-export const Surface: StoryObj<typeof BaseButton> = {
-  args: {
-    label: 'Surface',
-    color: 'surface',
-  },
-}
-
-export const Base: StoryObj<typeof BaseButton> = {
-  args: {
-    label: 'Base',
-    color: 'base',
-  },
-}
+export const DocsOnly: Story = {}

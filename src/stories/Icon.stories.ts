@@ -1,23 +1,29 @@
-import BaseIcon from '@/components/icons/BaseIcon.vue'
+import Icon from '@/components/icons/Icon.vue'
 import type { Meta, StoryObj } from '@storybook/vue3'
 
-const meta: Meta<typeof BaseIcon> = {
-  title: 'UI/BaseIcon',
-  component: BaseIcon,
-  tags: ['autodocs'],
+const meta: Meta<typeof Icon> = {
+  title: 'UI/Icon',
+  component: Icon,
+  tags: ['autodocs'], // Docs 탭 자동 생성
   args: {
-    icon: 'BaseIcon',
+    icon: 'src/assets/logo.svg',
+    label: '홈',
     background: 'surface',
     size: 'md',
+    sorting: 'vertical',
   },
   argTypes: {
     background: {
-      control: 'radio',
+      control: { type: 'radio' },
       options: ['surface', 'trans'],
     },
     size: {
-      control: 'radio',
+      control: { type: 'radio' },
       options: ['sm', 'md'],
+    },
+    sorting: {
+      control: { type: 'radio' },
+      options: ['vertical', 'horizon'],
     },
   },
   parameters: {
@@ -29,8 +35,8 @@ const meta: Meta<typeof BaseIcon> = {
     },
   },
 }
-export default meta
 
-type Story = StoryObj<typeof BaseIcon>
+export default meta
+type Story = StoryObj<typeof Icon>
 
 export const DocsOnly: Story = {}
