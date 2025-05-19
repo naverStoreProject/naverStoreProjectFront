@@ -1,7 +1,11 @@
 <template>
   <div class="overflow-x-auto scrollbar-none">
     <div class="home-nav">
-      <div v-for="nav in homeRouterNavs" class="home-nav-item">
+      <div
+        v-for="nav in homeRouterNavs"
+        class="home-nav-item"
+        :class="currentRoute === nav.name ? 'current-home-item' : ''"
+      >
         <RouterLink :to="{ name: nav.name }">
           <div v-text="nav.title"></div>
         </RouterLink>
@@ -10,7 +14,16 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import router from '@/router'
+import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
+
+const route = useRoute()
+const currentRoute = computed(() => {
+  return route.name
+})
+
 const homeRouterNavs = [
   { title: '홈', name: 'main-home' },
   { title: '오늘끝딜', name: 'deal-home' },
@@ -23,15 +36,6 @@ const homeRouterNavs = [
 </script>
 
 <style>
-/* scrollbar 는 공통 css로 이동해야함 */
-.scrollbar-none {
-  -ms-overflow-style: none; /* IE, Edge */
-  scrollbar-width: none; /* Firefox */
-}
-.scrollbar-none::webkit-scrollbar {
-  display: none;
-}
-
 .home-nav {
   display: flex;
   gap: 0.5rem;
@@ -44,7 +48,8 @@ const homeRouterNavs = [
   white-space: nowrap;
   padding: 0.3rem 0.5rem 0.5rem 0.3rem;
 }
-.home-nav-item::after {
+
+.current-home-item::after {
   content: '';
   display: block;
   position: absolute;

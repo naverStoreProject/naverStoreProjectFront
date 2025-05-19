@@ -1,19 +1,21 @@
 <template>
-  <Header :menu="'home'" />
   <div>
-    <!-- 검색창 (임시)-->
-    <div class="temp-search">
-      <input
-        type="text"
-        placeholder="검색"
-        class="border border-gray-300 rounded px-3 py-2 w-full"
-      />
+    <Header :menu="'home'" />
+    <div>
+      <!-- 검색창 (임시)-->
+      <div class="temp-search">
+        <input
+          type="text"
+          placeholder="검색"
+          class="border border-gray-300 rounded px-3 py-2 w-full"
+        />
+      </div>
+
+      <!-- 홈 상단 네비게이션 -->
+      <HomeNav />
+
+      <RouterView> </RouterView>
     </div>
-
-    <!-- 홈 상단 네비게이션 -->
-    <HomeNav />
-
-    <RouterView> </RouterView>
   </div>
 </template>
 

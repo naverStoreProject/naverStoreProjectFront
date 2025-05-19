@@ -18,8 +18,13 @@
   --font-gmarket-700: 'GmarketSansBold';
 }
 
+/*test*/
+.color-showing-text-class-do-not-use {
+  color: var(--color);
+}
+
 @layer base {
-  * {
+  body {
     font-size: var(--text-sm); /* 14px */
     color: var(--color-surface-950);
     font-family: 'GmarketSansMedium';
