@@ -1,6 +1,6 @@
 <template>
   <div class="min-h-screen bg-gray-100">
-    <div class="max-w-[1440px] mx-auto bg-white shadow-lg min-h-screen flex flex-col">
+    <div class="mx-auto flex min-h-screen max-w-[1440px] flex-col bg-white shadow-lg">
       <RouterView />
     </div>
   </div>

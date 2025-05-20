@@ -28,7 +28,7 @@ import ProductList from '@/components/products/ProductList.vue'
 import { ref } from 'vue'
 
 const viewTypes = ['list', 'grid-2', 'grid-3'] as const
-type ViewType = typeof viewTypes[number]
+type ViewType = (typeof viewTypes)[number]
 
 const viewType = ref<ViewType>('grid-2')
 

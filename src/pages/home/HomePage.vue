@@ -24,7 +24,7 @@ import Header from '@/components/layouts/header/Header.vue'
 import HomeNav from '@/pages/home/_components/HomeNav.vue'
 import { useRoute } from 'vue-router'
 
-const route = useRoute()
+useRoute()
 </script>
 
 <style>

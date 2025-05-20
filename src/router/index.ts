@@ -78,11 +78,20 @@ const routes: RouteRecordRaw[] = [
         component: routeMap.category,
         meta: { useHeader: false },
       },
+
+      {
+        path: '/category/:categoryId/:subCategoryId',
+        name: 'category-detail',
+        component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
+        meta: { useHeader: true },
+      },
+
       {
         path: 'product-list',
         name: 'product-list',
         component: routeMap.productList,
       },
+
       {
         path: 'product-item/:itemId',
         name: 'product-item',
