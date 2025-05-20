@@ -1,44 +1,54 @@
 <template>
-    <div class="w-3/4 overflow-y-auto px-8 py-6 bg-[var(--color-white)]">
-        <h2 class="text-xl font-['GmarketSansBold'] mb-4 text-[var(--color-surface-950)]">
-            {{ store.currentCategoryName }}
-        </h2>
-        <ul>
-            <li v-for="subItem in store.currentSubCategories" :key="subItem.id"
-                class="py-2 flex items-center justify-between cursor-pointer hover:text-[var(--color-primary-400)]"
-                @click="navigateToSub(subItem.id)">
-                <div class="flex items-center gap-3">
-                    <span class="text-[var(--color-surface-950)]">
-                        {{ subItem.name }}
-                    </span>
-                    <span v-if="subItem.tag"
-                        class="bg-[var(--color-secondary-300)] text-[var(--color-white)] text-xs px-2 py-1 rounded-full font-['GmarketSansLight']">
-                        {{ subItem.tag }}
-                    </span>
-                </div>
-                <span class="text-[var(--color-surface-300)]">&gt;</span>
-            </li>
-        </ul>
+    <div ref="container" class="w-3/4 overflow-y-scroll h-full p-4 space-y-10" @scroll="handleScroll">
+        <div v-for="cat in categories" :key="cat.id" :id="`section-${cat.id}`" :ref="el => sectionRefs.set(cat.id, el)"
+            class="mb-6">
+            <h2 class="text-xl font-bold text-[--color-primary-400] mb-2">{{ cat.name }}</h2>
+
+            <ul v-if="subCategories[cat.id]?.length" class="grid grid-cols-1 gap-1">
+                <li v-for="sub in subCategories[cat.id]" :key="sub.id" class="p-2 rounded bg-[--color-surface-300]">
+                    {{ sub.name }}
+                </li>
+            </ul>
+
+            <p v-else class="text-gray-400 text-sm">등록된 서브카테고리가 없습니다.</p>
+        </div>
     </div>
 </template>
 
-
-
 <script setup lang="ts">
-import { useCategoryStore } from '@/stores/categoryStore';
-import { useRouter } from 'vue-router';
+import { ref, onMounted } from 'vue'
+import { useCategoryStore } from '@/stores/categoryStore'
+import { storeToRefs } from 'pinia'
 
-const router = useRouter();
-const store = useCategoryStore();
+const store = useCategoryStore()
+const { categories, subCategories, selectedCategoryId } = storeToRefs(store)
+const { selectCategory } = store
 
-function navigateToSub(subCategoryId: number) {
-    router.push({
-        name: 'category-detail',
-        params: {
-            categoryId: store.selectedCategoryId,
-            subCategoryId: subCategoryId
-        },
-    });
+const container = ref<HTMLElement | null>(null)
+const sectionRefs = new Map<number, HTMLElement>()
+
+const handleScroll = () => {
+    if (!container.value) return
+
+    const containerTop = container.value.getBoundingClientRect().top
+
+    let closestId = categories.value[0].id
+    let minDistance = Infinity
+
+    for (const [id, el] of sectionRefs.entries()) {
+        const distance = Math.abs(el.getBoundingClientRect().top - containerTop)
+        if (distance < minDistance) {
+            minDistance = distance
+            closestId = id
+        }
+    }
+
+    if (selectedCategoryId.value !== closestId) {
+        selectCategory(closestId)
+    }
 }
 
+onMounted(() => {
+    handleScroll()
+})
 </script>
