@@ -1,8 +1,7 @@
 <template>
-  <Header/>
+  슈퍼적립
 </template>
 
 <script setup>
-import Header from '@/'
 
 </script>

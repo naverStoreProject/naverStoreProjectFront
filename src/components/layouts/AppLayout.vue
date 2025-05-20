@@ -1,17 +1,18 @@
 <template>
-  <div class="flex min-h-screen flex-col">
-    <main class="relative flex-1 pb-20 ...">
-      <!-- <Header v-if="route.meta.useHeader !== false" /> -->
+  <div class="flex flex-col min-h-screen">
+    <main class="flex-1 pb-20 relative ...">
       <RouterView />
       <TabBar />
     </main>
   </div>
+  <Offcanvas v-for="(item, index) in offcanvasStore.stack" :key="index" :menu="item" :index="index">
+  </Offcanvas>
 </template>
 
-<script setup>
-import { useRoute } from 'vue-router'
-// import Header from '@/components/layouts/Header.vue'
+<script setup lang="ts">
 import TabBar from '@/components/layouts/TabBar.vue'
+import Offcanvas from '../offcanvas/Offcanvas.vue'
+import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
-const route = useRoute()
+const offcanvasStore = useOffcanvasStore()
 </script>

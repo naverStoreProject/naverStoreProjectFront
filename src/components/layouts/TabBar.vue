@@ -17,7 +17,7 @@
 <script setup lang="ts">
 //bottom-nav 리스트
 const bottomNavList = [
-  { name: '홈', router: 'home', src: '' },
+  { name: '홈', router: 'main-home', src: '' },
   { name: '발견', router: 'home', src: '' },
   { name: '카테고리', router: 'category', src: '' },
   { name: '검색', router: 'search', src: '' },
