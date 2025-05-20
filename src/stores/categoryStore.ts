@@ -15,16 +15,6 @@ export const useCategoryStore = defineStore('category', () => {
     { id: 8, name: '식품' },
     { id: 9, name: '생활/주방' },
     { id: 10, name: '도서/음반' },
-    { id: 11, name: '자동차용품' },
-    { id: 12, name: '출산/유아동' },
-    { id: 13, name: '가구/인테리어' },
-    { id: 14, name: '문구/사무용품' },
-    { id: 15, name: '헬스/건강식품' },
-    { id: 16, name: '여행/레저용품' },
-    { id: 17, name: '반려동물용품' },
-    { id: 18, name: '홈데코' },
-    { id: 19, name: '자동차용품' },
-    { id: 20, name: '기타' },
   ])
 
   // 각 카테고리 id마다 20개씩 더미 서브카테고리 생성

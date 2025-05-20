@@ -3,8 +3,8 @@
         <div v-for="cat in categories" :key="cat.id" @click="scrollToCategory(cat.id)" :class="[
             'p-4 cursor-pointer transition',
             selectedCategoryId === cat.id
-                ? 'bg-[--color-primary-400] text-white font-bold'
-                : 'hover:bg-gray-100'
+                ? 'bg-[var(--color-primary-400)] font-[\'GmarketSansBold\']'
+                : 'hover:bg-[var(--color-surface-300)] text-[var(--color-surface-900)]'
         ]">
             {{ cat.name }}
         </div>
