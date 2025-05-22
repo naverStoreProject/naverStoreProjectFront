@@ -1,12 +1,12 @@
 <template>
   <header>
-    <div class="flex justify-between p-3">
+    <div class="flex justify-between p-4">
       <div class="header-left text-xl">
         <div v-if="routeMenuList.back" @click="backBtnFunc">
           <i class="fa-solid fa-arrow-left"></i>
         </div>
-        <div v-if="routeMenuList.mainLogo">
-          <img src="" alt="logo" />
+        <div v-if="routeMenuList.mainLogo" class="logo-img">
+          <img :src="logo.mainLogo" alt="mainLogo"/>
         </div>
         <div v-if="routeMenuList.mainTitle">
           <div v-text="mainTitle"></div>
@@ -32,10 +32,16 @@
           <i class="fa-regular fa-bell"></i>
         </div>
         <div v-if="routeMenuList.setting" class="header-right__alarm">
-          <i class="fa-solid fa-gear"></i>
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" class="_headerControl_icon_EaQfx">
+            <path stroke="currentColor" stroke-width="1.5" d="M15.359 12.032c0 1.806-1.48 3.27-3.31 3.27s-3.31-1.464-3.31-3.27 1.48-3.27 3.31-3.27 3.31 1.464 3.31 3.27z" clip-rule="evenodd"></path>
+            <path stroke="currentColor" stroke-width="1.5" d="M19.495 12.03c0-.318-.021-.632-.06-.94a.156.156 0 01.044-.131l1.628-1.61a.925.925 0 00.15-1.128L19.94 5.968a.953.953 0 00-1.064-.437l-2.274.603a.156.156 0 01-.132-.026 7.412 7.412 0 00-1.535-.862.156.156 0 01-.091-.103l-.613-2.26a.945.945 0 00-.914-.694h-2.635a.945.945 0 00-.913.693l-.626 2.303a.156.156 0 01-.088.102 7.489 7.489 0 00-1.456.84.156.156 0 01-.133.025l-2.343-.62a.953.953 0 00-1.064.435L2.742 8.22a.926.926 0 00.15 1.128l1.713 1.693a.16.16 0 01.045.13 7.223 7.223 0 00-.006 1.664.156.156 0 01-.046.128L2.892 14.65a.928.928 0 00-.15 1.128l1.318 2.255a.949.949 0 001.063.436l2.284-.605a.156.156 0 01.133.026c.471.354.985.655 1.534.892a.156.156 0 01.09.103l.605 2.235c.11.408.486.692.913.692h2.635a.944.944 0 00.913-.692l.595-2.194a.156.156 0 01.091-.103 7.439 7.439 0 001.612-.913.156.156 0 01.133-.026l2.215.585a.95.95 0 001.064-.436l1.317-2.255a.926.926 0 00-.15-1.128l-1.622-1.602a.156.156 0 01-.045-.13c.036-.29.055-.586.055-.886z" clip-rule="evenodd"></path>
+          </svg>
         </div>
         <div v-if="routeMenuList.basket" class="header-right__basket">
-          <i class="fa-solid fa-bag-shopping"></i>
+          <svg width="24" height="24" fill="none" viewBox="0 0 24 24" class="_headerControl_icon_EaQfx">
+          <path stroke="currentColor" stroke-linecap="round" stroke-width="1.5" d="M16.013 10.224v-4.42A4.003 4.003 0 0012.01 1.8v0a4.003 4.003 0 00-4.003 4.003v4.421"></path>
+          <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.644 7.707H3.356a.877.877 0 00-.854 1.077L4.662 18a3.508 3.508 0 003.416 2.707h7.845A3.508 3.508 0 0019.337 18l2.16-9.216a.877.877 0 00-.854-1.077z"></path>
+        </svg>
         </div>
         <div v-if="routeMenuList.searching" class="header-right__" @click="openSearchOffCanvas">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -60,6 +66,8 @@ import type { routeType } from './header'
 import { menuList, mainTitleList, routerList } from './header'
 
 import { useOffcanvasStore } from '@/stores/offcanvasStore'
+
+import logo from '@/assets/image/logo/logo'
 
 const route = useRoute()
 const router = useRouter()
@@ -157,5 +165,14 @@ watch(
 .header-right {
   display: flex;
   gap: 1rem;
+}
+
+.logo-img {
+  height: 1.3rem;
+}
+.logo-img > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 </style>
