@@ -26,8 +26,6 @@ defineProps<{
   padding: 1rem 0.5rem;
 }
 
-
-
 .products.middle > * {
   width: 45%;
 }
