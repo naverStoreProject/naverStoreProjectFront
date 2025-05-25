@@ -11,7 +11,7 @@
             </h2>
 
             <ul v-if="subCategories[cat.id]?.length" class="grid grid-cols-1 gap-1">
-                <li v-for="sub in subCategories[cat.id]" :key="sub.id"
+                <li v-for="sub in subCategories[cat.id]" :key="sub.id" @click="navigateToSub(sub.id)"
                     class="p-2 text-xs rounded bg-[--color-surface-300] hover:cursor-pointer hover:bg-[--color-surface-600] transition-colors">
                     {{ sub.name }}
                 </li>
@@ -32,6 +32,18 @@ import { ref, onMounted } from 'vue'
 import { useCategoryStore } from '@/stores/categoryStore'
 import { storeToRefs } from 'pinia'
 
+import { useRouter } from 'vue-router';
+const router = useRouter();
+
+function navigateToSub(subCategoryId: number) {
+    router.push({
+        name: 'category-detail',
+        params: {
+            categoryId: store.selectedCategoryId,
+            subCategoryId: subCategoryId
+        },
+    });
+}
 const store = useCategoryStore()
 const { categories, subCategories, selectedCategoryId } = storeToRefs(store)
 const { selectCategory } = store

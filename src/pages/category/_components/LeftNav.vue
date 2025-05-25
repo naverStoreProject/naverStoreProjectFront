@@ -2,9 +2,9 @@
     <div ref="navContainer" class="w-1/8 overflow-y-auto bg-white">
         <div v-for="cat in categories" :key="cat.id" :data-id="cat.id" ref="itemRefs" @click="scrollToCategory(cat.id)"
             :class="[
-                'p-4 cursor-pointer transition text-xs',
+                'p-4 cursor-pointer transition text-xs bg-[var(--color-surface-50)]',
                 selectedCategoryId === cat.id
-                    ? 'bg-[var(--color-surface-300)] font-[\'GmarketSansBold\']'
+                    ? ' bg-white font-[\'GmarketSansBold\']'
                     : 'hover:bg-[var(--color-surface-300)] text-[var(--color-surface-900)]'
             ]">
             {{ cat.name }}
