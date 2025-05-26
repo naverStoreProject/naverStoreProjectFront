@@ -3,6 +3,7 @@ import type { RouteRecordRaw } from 'vue-router'
 import AppLayout from '@/components/layouts/AppLayout.vue'
 import Page404 from '@/pages/notfound/Page404.vue'
 import { routeMap } from '@/router/routeMap'
+import meta from '@/stories/BaseBtn.stories'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -78,12 +79,12 @@ const routes: RouteRecordRaw[] = [
         component: routeMap.category,
         meta: { useHeader: false },
       },
-
       {
-        path: '/category/:categoryId/:subCategoryId',
+        path: 'category/:subCategoryId',
         name: 'category-detail',
-        component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
-        meta: { useHeader: true },
+        // component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
+        component: routeMap.subCategoryDetail,
+        meta: { useHeader: false },
       },
 
       {
