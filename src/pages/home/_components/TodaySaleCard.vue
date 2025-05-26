@@ -6,8 +6,8 @@
         <template v-if="viewType === 'small'">
           <p class="tag-name-line">
             <span class="tag-text-wrapper" v-if="todaySale.adTag">
-              <span class="tag-text">광고</span>&nbsp;
-            </span>{{ todaySale.name }}
+              <span class="tag-text">광고</span>&nbsp; </span
+            >{{ todaySale.name }}
           </p>
         </template>
         <template v-else>
@@ -24,18 +24,23 @@
         <span class="original">{{ todaySale.originalPrice }}원</span>
       </p>
       <p class="price">
-        <span class="discount-rate" v-if="todaySale.discountRate">{{ todaySale.discountRate }}</span> &nbsp;
+        <span class="discount-rate" v-if="todaySale.discountRate">{{
+          todaySale.discountRate
+        }}</span>
+        &nbsp;
         <span class="current">{{ todaySale.currentPrice }}원</span>
       </p>
 
-      <p class="rating" v-if="viewType === 'small' && todaySale.averageRating && todaySale.ratingCount">
+      <p
+        class="rating"
+        v-if="viewType === 'small' && todaySale.averageRating && todaySale.ratingCount"
+      >
         ⭐ {{ todaySale.averageRating }} ({{ todaySale.ratingCount }})
       </p>
     </div>
   </div>
 </template>
 
-todaySale
 <script setup lang="ts">
 import type { TodaySale } from '../todaySaleData.ts'
 
@@ -44,7 +49,6 @@ const props = defineProps<{
   viewType: 'long' | 'middle' | 'small'
 }>()
 </script>
-
 
 <style scoped>
 .todaySale-card {
@@ -157,7 +161,7 @@ const props = defineProps<{
 }
 
 .name {
-  flex: 1;               /* 나머지 공간 차지 */
+  flex: 1; /* 나머지 공간 차지 */
   font-weight: bold;
   font-size: 15px;
   overflow: hidden;
