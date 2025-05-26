@@ -13,8 +13,7 @@
   <!-- 컨텐츠들 -->
   <HomeInterest />
 
-  <HomeTodaySale/>
-
+  <HomeTodaySale />
 </template>
 
 <script setup>
