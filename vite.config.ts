@@ -19,8 +19,13 @@ export default defineConfig(({ mode }) => {
     },
     server: {
       port: Number(env.VITE_PORT) || 5173,
-      allowedHosts: ['nspf.dreamcat.kr'],
+      allowedHosts: env.VITE_ALLOWED_HOSTS ? env.VITE_ALLOWED_HOSTS.split(',') : [],
       host: true,
+      hmr: {
+        host: env.VITE_ALLOWED_HOSTS ? env.VITE_ALLOWED_HOSTS.split(',')[0] : 'localhost',
+        protocol: 'wss',
+        clientPort: 443,
+      },
       proxy: {
         '/api': {
           target: env.VITE_API_URL || 'http://localhost:8080',
