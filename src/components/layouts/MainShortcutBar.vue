@@ -1,9 +1,16 @@
 <template>
-  <div class="overflow-x-auto scrollbar-none w-full">
+  <div class="scrollbar-none w-full overflow-x-auto">
     <div class="shorcut-box">
       <div v-for="list in shorcutList" class="shortcut-item" @click="clickShortcut(list.name)">
         <div class="flex flex-col items-center">
-          <Icon background="trans" :icon="shorcutImg[list.name]" rounded="xl" size="lg" sorting="horizon" />
+          <Icon
+            background="trans"
+            :icon="shorcutImg[list.name]"
+            rounded="xl"
+            size="lg"
+            sorting="horizon"
+            label=""
+          />
           <div v-text="list.title" class="shortcut-item__text"></div>
         </div>
       </div>
