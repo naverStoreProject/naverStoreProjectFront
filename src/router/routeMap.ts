@@ -27,7 +27,7 @@ const routeMap: Record<string, () => Promise<any>> = {
 
   //category
   category: () => import('@/pages/category/CategoryPage.vue'),
-
+  subCategoryDetail: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
   //product
   productList: () => import('@/pages/product/ProductListPage.vue'),
   productDetail: () => import('@/pages/product/ProductDetailPage.vue'),
