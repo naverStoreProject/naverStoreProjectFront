@@ -39,6 +39,7 @@
   /* --color-blue-700: oklch(0.5067 0.1478 255.54); */
   /* --color-blue-800: oklch(0.4092 0.1379 259.17); */
   --color-blue-900: oklch(0.3387 0.1316 261.78);
+  /* 무채색은 50,100,300,500만 사용 */
   --color-surface-50: oklch(0.97 0 0);
   --color-surface-100: oklch(0.9642 0 0);
   /* --color-surface-200: oklch(0.928 0 0); */
