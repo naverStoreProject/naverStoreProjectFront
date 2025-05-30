@@ -1,4 +1,5 @@
 <template>
+
     <div ref="navContainer" class="w-1/8 overflow-y-auto bg-white">
         <div v-for="cat in categories" :key="cat.id" :data-id="cat.id" ref="itemRefs" @click="scrollToCategory(cat.id)"
             :class="[
@@ -54,4 +55,5 @@ watch(selectedCategoryId, (newId) => {
 onMounted(() => {
     itemRefs.value = Array.from(document.querySelectorAll('[data-id]')) as HTMLElement[]
 })
+
 </script>

@@ -20,18 +20,17 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import ProductList from '@/components/products/ProductList.vue'
-import {  defineProps, ref } from 'vue'
+import { defineProps, ref } from 'vue'
 
 interface Props {
-  searchQuery?: string; // searchQuery는 선택적일 수 있음 (초기값 때문)
+  searchQuery?: string // searchQuery는 선택적일 수 있음 (초기값 때문)
 }
 
 type ViewType = (typeof viewTypes)[number]
 
-const props = defineProps<Props>();
+const props = defineProps<Props>()
 
 const viewTypes = ['long', 'middle', 'small'] as const
 const searchText = ref('')
@@ -46,9 +45,7 @@ function changeNextViewType() {
 const goBack = () => {
   history.back()
 }
-
 </script>
-
 
 <style scoped>
 .container {

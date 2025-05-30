@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between text-md">
+  <div class="text-md flex justify-between">
     <div>
       <i class="fa-solid fa-lock"></i>
       <span>로그인 하고 맞춤 혜택 받으세요</span>
@@ -7,7 +7,7 @@
 
     <div>
       <RouterLink :to="{ name: 'login' }">
-        <div class="text-primary-400">로그인 하러 가기</div>
+        <div class="text-primary-500">로그인 하러 가기</div>
       </RouterLink>
     </div>
   </div>
