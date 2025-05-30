@@ -19,7 +19,7 @@
       >
         {{ label }}
       </div>
-      <div v-if="explain" class="text-primary-500 font-gmarket-bold text-base">
+      <div v-if="explain" class="text-primary-400 font-gmarket-bold text-base">
         {{ explain }}
       </div>
     </div>
