@@ -1,6 +1,5 @@
 <template>
-  <div>
-    마이페이지
+  <div class="bg-surface-50 px-4 py-8">
     <router-view />
   </div>
 </template>

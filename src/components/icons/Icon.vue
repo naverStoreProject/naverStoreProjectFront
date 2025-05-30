@@ -9,8 +9,19 @@
     v-bind="$attrs"
   >
     <BaseIcon :icon="icon" :background="background" :size="size" />
-    <div class="text-center" :class="size === 'sm' && 'text-sm',size==='md'&& 'text-base'">
-      {{ label }}
+    <div class="flex flex-col items-start">
+      <div
+        :class="[
+          'text-center',
+          size === 'sm' && (explain ? 'text-xs' : 'text-sm'),
+          size === 'md' && (explain ? 'text-sm' : 'text-base'),
+        ]"
+      >
+        {{ label }}
+      </div>
+      <div v-if="explain" class="text-primary-400 font-gmarket-bold text-base">
+        {{ explain }}
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +33,7 @@ defineOptions({ inheritAttrs: false })
 defineProps<{
   icon: string
   label: string
+  explain?: string
   background: 'surface' | 'trans'
   size: 'sm' | 'md'
   sorting: 'vertical' | 'horizon'
