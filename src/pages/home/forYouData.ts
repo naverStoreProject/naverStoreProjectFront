@@ -9,7 +9,7 @@ export interface TodaySale {
   averageRating: string
   ratingCount: string
   adTag: boolean
-  tag?: string // InterestCarousel에서 쓸 태그
+  tag?: string
 }
 
 export const todaySales: TodaySale[] = [

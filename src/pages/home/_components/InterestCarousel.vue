@@ -1,4 +1,3 @@
-<!-- components/InterestCarousel.vue -->
 <template>
   <div class="flex items-center gap-3 overflow-x-auto py-4 px-2">
     <button
@@ -14,15 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import type { TodaySale } from '../forYouData' // 타입만 import (type 키워드 사용)
+import type { TodaySale } from '../forYouData'
 
-// props 정의
 defineProps<{
   items: TodaySale[]
   activeId: string | null
 }>()
 
-// emit 정의
 defineEmits<{
   (e: 'select', item: TodaySale): void
 }>()
