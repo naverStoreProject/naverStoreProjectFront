@@ -85,3 +85,7 @@
   font-weight: normal;
   font-style: normal;
 }
+
+.disabled {
+  @apply text-surface-300 pointer-events-none cursor-not-allowed grayscale;
+}
