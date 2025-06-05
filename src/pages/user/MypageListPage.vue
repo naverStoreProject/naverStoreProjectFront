@@ -6,7 +6,7 @@
         <BaseIcon background="surface" icon="BaseIcon" size="md" />
         <div class="flex flex-col">
           <span class="font-gmarket-bold text-lg"> {{ user.nickname }}님</span>
-          <span class="font-gmarket-light text-surface-600 flex items-center gap-1 text-xs"
+          <span class="font-gmarket-light text-surface-400 flex items-center gap-1 text-xs"
             >맞춤 정보 수정 <img class="h-2" :src="NavIcon" alt="전체보기 아이콘"
           /></span>
         </div>
@@ -26,7 +26,7 @@
         sorting="horizon"
       />
       <div
-        class="text-surface-600 font-gmarket-light flex items-center justify-center gap-1 text-xs"
+        class="text-surface-400 font-gmarket-light flex items-center justify-center gap-1 text-xs"
         @click="clickNotice"
       >
         {{ notice.title }} <img class="h-3" :src="NavIcon" alt="전체보기 아이콘" />

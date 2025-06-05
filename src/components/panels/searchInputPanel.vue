@@ -10,14 +10,14 @@
         v-model="searchQuery"
         @keyup.enter="emitSearch"
       />
-      <span class="text-gray-500" @click="emitSearch">🔍</span>
+      <span class="text-surface-400" @click="emitSearch">🔍</span>
     </div>
 
     <!-- 최근 검색어 -->
     <div>
       <div class="mb-2 flex items-center justify-between">
-        <div class="text-xs text-gray-500">최근 검색어</div>
-        <button @click="clearRecent" class="text-xs text-gray-500">전체삭제</button>
+        <div class="text-surface-400 text-xs">최근 검색어</div>
+        <button @click="clearRecent" class="text-surface-400 text-xs">전체삭제</button>
       </div>
 
       <!-- 최근 검색어 리스트 -->
@@ -28,18 +28,18 @@
           :key="i"
         >
           <div>
-            <span class="text-gray-500">🔍</span>
+            <span class="text-surface-400">🔍</span>
             <span>{{ word }}</span>
-            <span class="text-xs text-gray-400">{{ getToday() }}</span>
+            <span class="text-surface-400 text-xs">{{ getToday() }}</span>
           </div>
-          <button class="text-xs text-gray-400" @click="removeRecent(i)">×</button>
+          <button class="text-surface-400 text-xs" @click="removeRecent(i)">×</button>
         </div>
       </div>
     </div>
 
     <!-- 추천 검색어 -->
     <div>
-      <div class="mb-2 text-xs text-gray-500">추천 검색어</div>
+      <div class="text-surface-400 mb-2 text-xs">추천 검색어</div>
       <div class="flex flex-wrap gap-2">
         <BaseBtn
           v-for="(tag, i) in recommendedTags"
@@ -54,7 +54,7 @@
 
     <!-- 오늘의 혜택 -->
     <div class="space-y-2">
-      <div class="text-xs text-gray-500">오늘의 혜택</div>
+      <div class="text-surface-400 text-xs">오늘의 혜택</div>
       <div class="flex gap-2 overflow-x-auto">
         <BaseBtn
           v-for="(boon, i) in todayBoons"
@@ -69,7 +69,7 @@
 
     <!-- 인기 검색어 -->
     <div>
-      <div class="mb-2 flex items-center justify-between text-xs text-gray-500">
+      <div class="text-surface-400 mb-2 flex items-center justify-between text-xs">
         <span>인기 검색어</span>
         <span>05.22. 기준, 전체</span>
       </div>
@@ -81,7 +81,7 @@
             :key="index"
             class="flex items-center space-x-2"
           >
-            <span class="w-4 font-semibold text-red-600">{{ index + 1 }}</span>
+            <span class="w-4 font-semibold text-red-500">{{ index + 1 }}</span>
             <span>{{ item }}</span>
           </div>
         </div>
