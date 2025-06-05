@@ -7,7 +7,7 @@
         <input
           type="text"
           placeholder="검색"
-          class="border border-gray-300 rounded px-3 py-2 w-full"
+          class="border-surface-400 w-full rounded border px-3 py-2"
         />
       </div>
 

@@ -9,7 +9,7 @@
           class="flex-1 border-b p-2 outline-none"
           v-model="props.searchQuery"
         />
-        <span class="text-gray-500">🔍</span>
+        <span class="text-surface-300">🔍</span>
       </div>
 
       <div class="filters pt-2">

@@ -21,6 +21,6 @@ const bottomNavList = [
   { name: '발견', router: 'home', src: 'src/assets/logo.svg' },
   { name: '카테고리', router: 'category', src: 'src/assets/logo.svg' },
   { name: '검색', router: 'search', src: 'src/assets/logo.svg' },
-  { name: '마이쇼핑', router: 'user', src: 'src/assets/logo.svg' },
+  { name: '마이쇼핑', router: 'mypage', src: 'src/assets/logo.svg' },
 ]
 </script>
