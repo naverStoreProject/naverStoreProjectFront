@@ -1,10 +1,14 @@
+<template>
+  {{ props.title }}
+</template>
+
 <script setup lang="ts">
 
-</script>
+  const props = defineProps<{
+    title: title
+  }>()
 
-<template>
-  $END$
-</template>
+</script>
 
 <style scoped>
 
