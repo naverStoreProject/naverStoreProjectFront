@@ -1,7 +1,7 @@
 <template>
   <button
     :class="[
-      'w-auto self-start transition',
+      'w-auto cursor-pointer self-start transition',
       color === 'primary' && 'bg-primary-500 text-white',
       color === 'surface' && 'bg-primary-200',
       color === 'base' && 'border-primary-500 border bg-white',
@@ -18,14 +18,14 @@
     v-bind="$attrs"
     @click="onClick"
   >
-    {{ label }}
+    <slot>{{ label }}</slot>
   </button>
 </template>
 
 <script setup lang="ts">
 defineOptions({ inheritAttrs: false })
 defineProps<{
-  label: string
+  label?: string
   color?: 'primary' | 'surface' | 'base'
   size?: 'sm' | 'md' | 'lg' | 'xl' | 'square'
   rounded?: 'full' | 'lg' | 'square'
