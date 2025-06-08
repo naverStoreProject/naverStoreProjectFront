@@ -12,29 +12,53 @@
       >
         <template #default>
           <span>{{ tab.label }}</span>
-          <span v-if="tab.count !== undefined" class="text-secondary-500 font-gmarket-bold ml-1">
+          <span v-if="idx !== 0 && tab.count !== undefined" class="text-secondary-500 ml-1">
             {{ tab.count.toLocaleString() }}
           </span>
         </template>
       </BaseBtn>
     </div>
-    <OrderBox />
+    <OrderBox class="mb-3" v-for="order in filteredOrders" :key="order.id" :order="order" />
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref, watchEffect, reactive } from 'vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import OrderBox from '@/pages/user/_components/OrderBox.vue'
+import { orderedList } from './OrderData'
+
+const orders = ref(orderedList)
 
 // 버튼 구성 데이터
-const tabs = [
-  { label: '전체', count: undefined },
-  { label: '최대 포인트 적립 가능 금액', count: 2973 },
-  { label: '배송진행', count: 2 },
-  { label: '취소/교환/반품', count: 1 },
-]
+const tabs = reactive([
+  { label: '전체', filterKey: null, count: undefined },
+  { label: '최대 포인트 적립 가능 금액', filterKey: ['배송 완료'], count: 0 as number | string },
+  { label: '배송진행', filterKey: ['배송 중'], count: 0 },
+  { label: '취소/교환/반품', filterKey: ['반품 요청', '교환 요청'], count: 0 },
+])
 
 // 선택된 인덱스
 const selectedIdx = ref(0)
+
+// watchEffect로 상태별 count 동기화
+watchEffect(() => {
+  tabs[1].count =
+    Math.floor(
+      orders.value
+        .filter(order => tabs[1].filterKey!.includes(order.status))
+        .reduce((sum, order) => sum + order.price, 0) * 0.01
+    ).toLocaleString() + '원'
+
+  tabs[2].count = orders.value.filter(order => tabs[2].filterKey!.includes(order.status)).length
+
+  tabs[3].count = orders.value.filter(order => tabs[3].filterKey!.includes(order.status)).length
+})
+
+// 필터링된 주문 목록 계산 속성
+const filteredOrders = computed(() => {
+  const filter = tabs[selectedIdx.value].filterKey
+  if (!filter) return orders.value
+  return orders.value.filter(order => filter.includes(order.status))
+})
 </script>
