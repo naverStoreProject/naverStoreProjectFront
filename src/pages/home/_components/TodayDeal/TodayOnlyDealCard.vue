@@ -54,12 +54,13 @@ const props = defineProps<{
 .todayOnlyDeal-card {
   display: flex;
   flex-direction: column;
-  padding: 4px;
-  border-radius: 8px;
+  padding: 0.25rem;
+  border-radius: 0.5rem;
   overflow: hidden;
-  background: #fff;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+  background: var(--color-white);
+  box-shadow: 0 0 0.3125rem rgba(0, 0, 0, 0.05);
   transition: all 0.2s ease;
+  font-family: var(--font-gmarket-500);
 }
 
 .todayOnlyDeal-card img {
@@ -71,18 +72,18 @@ const props = defineProps<{
 .todayOnlyDeal-card.long {
   flex-direction: row;
   width: 100%;
-  height: 120px;
-  gap: 16px;
+  height: 7.5rem;
+  gap: 1rem;
   padding: 0.5rem;
   box-sizing: border-box;
   align-items: center;
 }
 
 .todayOnlyDeal-card.long img {
-  width: 100px;
+  width: 6.25rem;
   height: 100%;
   object-fit: cover;
-  border-radius: 6px;
+  border-radius: 0.375rem;
 }
 
 .todayOnlyDeal-card.long .todaySale-info {
@@ -94,55 +95,60 @@ const props = defineProps<{
 }
 
 .todayOnlyDeal-info {
-  padding: 8px;
+  padding: 0.5rem;
 }
 
 .brand {
-  font-size: 12px;
-  color: #666;
+  font-size: 0.8125rem;
+  color: var(--color-surface-600);
+  width: 100%;
 }
 
 .price {
-  margin-top: 6px;
+  margin-top: 0.375rem;
+  font-family: var(--font-gmarket-700);
 }
 
 .discount-rate {
-  color: #d00;
+  color: var(--color-negative-700);
   font-weight: bold;
 }
 
 .original {
-  font-size: 12px;
-  color: #aaa;
+  font-size: 0.75rem;
+  color: var(--color-surface-300);
   text-decoration: line-through;
+  font-family: var(--font-gmarket-300);
 }
 
 .meta-row {
   align-items: center;
-  gap: 0px;
-  flex-wrap: nowrap; /* 강제로 한 줄 */
+  gap: 0;
+  flex-wrap: nowrap;
 }
 
 .tag-name-line {
   font-weight: bold;
-  font-size: 15px;
+  font-size: 0.9375rem;
   line-height: 1.4;
   overflow-wrap: anywhere;
-  word-break: break-all;
+  word-break: break-word;
+  font-family: var(--font-gmarket-700);
 }
 
 .tag-text-wrapper {
-  display: contents; /* span이 존재하되 레이아웃에 영향 없음 */
+  display: contents;
 }
 
 .tag-text {
-  background: #eee;
-  padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 4px;
-  color: #333;
+  background: var(--color-surface-300);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  color: var(--color-surface-950);
   white-space: nowrap;
-  margin-right: 4px;
+  margin-right: 0.25rem;
+  font-family: var(--font-gmarket-500);
 }
 
 .brand-ad-tag-line {
@@ -153,25 +159,21 @@ const props = defineProps<{
 
 .ad-tag {
   flex-shrink: 0;
-  background: #eee;
-  padding: 2px 6px;
-  font-size: 12px;
-  border-radius: 4px;
-  color: #333;
+  background: var(--color-surface-300);
+  padding: 0.125rem 0.375rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  color: var(--color-surface-950);
+  font-family: var(--font-gmarket-500);
 }
 
 .name {
-  flex: 1; /* 나머지 공간 차지 */
+  flex: 1;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 0.9375rem;
   overflow: hidden;
   overflow-wrap: anywhere;
   text-overflow: ellipsis;
-}
-
-.brand {
-  font-size: 13px;
-  color: #555;
-  width: 100%;
+  font-family: var(--font-gmarket-700);
 }
 </style>
