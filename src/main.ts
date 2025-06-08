@@ -8,10 +8,15 @@ import '@fortawesome/fontawesome-free/css/all.css'
 
 import App from './App.vue'
 import router from './router'
+import { useUserStore } from '@/stores/user'
 
 const app = createApp(App)
+const pinia = createPinia()
 
-app.use(createPinia())
+app.use(pinia)
 app.use(router)
+
+const userStore = useUserStore()
+userStore.restoreToken()
 
 app.mount('#app')
