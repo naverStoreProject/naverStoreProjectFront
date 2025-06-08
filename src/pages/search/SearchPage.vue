@@ -1,13 +1,11 @@
 <template>
   <div class="container">
-    <searchInputPanel v-if="!showResults" @search="handleSearch" />
-    <searchResultPanel v-if="showResults" :searchQuery="currentSearchQuery" />
+    <SearchInputPage @search="handleSearch" />
   </div>
 </template>
 
 <script setup lang="ts">
-import searchResultPanel from '@/components/panels/searchResultPanel.vue'
-import searchInputPanel from '@/components/panels/searchInputPanel.vue'
+import SearchInputPage from '@/pages/search/SearchInputPage.vue'
 import { ref } from 'vue'
 
 const showResults = ref<boolean>(false)
@@ -25,10 +23,6 @@ const handleSearch = (query: string) => {
   }
 }
 
-const resetSearch = () => {
-  showResults.value = false
-  currentSearchQuery.value = ''
-}
 </script>
 
 <style scoped></style>
