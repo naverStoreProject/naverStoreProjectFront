@@ -2,7 +2,7 @@
   <div class="w-full rounded-2xl bg-white p-3">
     <div class="my-2 flex gap-2">
       <p class="font-gmarket-bold text-lg">{{ title }}</p>
-      <p class="text-primary-400 font-gmarket-bold text-lg">{{ cnt }}</p>
+      <p class="text-primary-500 font-gmarket-bold text-lg">{{ cnt }}</p>
     </div>
     <div class="flex gap-2">
       <!-- 상품 부분 -->

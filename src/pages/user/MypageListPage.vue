@@ -6,6 +6,7 @@
         <BaseIcon background="surface" :icon="userIcon" size="md" />
         <div class="flex flex-col">
           <span class="font-gmarket-bold text-lg"> {{ user.nickname }}님</span>
+
           <span
             class="font-gmarket-light text-surface-600 flex cursor-pointer items-center gap-1 text-xs"
             @click="() => gotoPage('profile')"

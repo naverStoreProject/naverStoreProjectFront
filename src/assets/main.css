@@ -43,7 +43,7 @@
   --color-surface-100: oklch(0.9642 0 0);
   /* --color-surface-200: oklch(0.928 0 0); */
   --color-surface-300: oklch(0.7858 0 0);
-  /* --color-surface-400: oklch(0.559 0 0); */
+  --color-surface-400: oklch(0.559 0 0);
   --color-surface-500: oklch(0.209 0 0);
   --color-white: oklch(1 0 0);
   --font-gmarket-light: 'GmarketSansLight';
