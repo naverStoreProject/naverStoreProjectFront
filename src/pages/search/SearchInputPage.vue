@@ -6,11 +6,11 @@
       <input
         type="text"
         placeholder="상품명 또는 브랜드 입력"
-        class="flex-1 border-b p-2 outline-none"
+        class="border-b p-2 outline-none"
         v-model="searchQuery"
-        @keyup.enter="emitSearch"
+        @keyup.enter="openSearchResultOffCanvas"
       />
-      <span class="text-gray-500" @click="emitSearch">🔍</span>
+      <span class="text-gray-500" @click="openSearchResultOffCanvas">🔍</span>
     </div>
 
     <!-- 최근 검색어 -->
@@ -92,11 +92,12 @@
 
 <script setup lang="ts">
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
-import { ref, defineEmits } from 'vue'
+import { ref } from 'vue'
+import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
 /* 추후 CRUD로 끌어올 데이터 */
 const searchQuery = ref('')
-const recentSearches = ref(['운동화', '신발', '셔츠'])
+const recentSearches = ref([])
 const recommendedTags = [
   '추천 태그 1',
   '추천 태그 2',
@@ -118,18 +119,17 @@ const popularSearches = [
   '인기 검색어 10',
 ]
 
-// 'search' 이벤트를 부모 컴포넌트로 발생시킬 것임을 명시
-// script setup에서는 defineEmits 매크로를 사용하여 이벤트를 정의합니다.
-const emit = defineEmits(['search'])
+const offcanvasStore = useOffcanvasStore()
 
-const emitSearch = () => {
-  // 검색어가 비어있거나 공백만 있는 경우 경고 메시지 표시
+// 입력한 검색어로 결과 페이지 오픈 (offcanvas)
+const openSearchResultOffCanvas = () => {
+
   if (searchQuery.value.trim() === '') {
     alert('검색어를 입력해주세요.')
-    return // 함수 실행 중단
+    return
   }
-  // 'search' 이벤트를 발생시키고, 현재 searchQuery의 값을 함께 전달
-  emit('search', searchQuery.value)
+
+  offcanvasStore.open('searchResult');
 }
 
 const goBack = () => {

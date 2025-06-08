@@ -8,6 +8,7 @@
           placeholder="상품명 또는 브랜드 입력"
           class="flex-1 border-b p-2 outline-none"
           v-model="props.searchQuery"
+          @click="openSearchInputOffCanvas"
         />
         <span class="text-gray-500">🔍</span>
       </div>
@@ -23,6 +24,7 @@
 <script setup lang="ts">
 import ProductList from '@/components/products/ProductList.vue'
 import { defineProps, ref } from 'vue'
+import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
 interface Props {
   searchQuery?: string // searchQuery는 선택적일 수 있음 (초기값 때문)
@@ -30,20 +32,30 @@ interface Props {
 
 type ViewType = (typeof viewTypes)[number]
 
+const offcanvasStore = useOffcanvasStore()
+
 const props = defineProps<Props>()
 
 const viewTypes = ['long', 'middle', 'small'] as const
 const searchText = ref('')
 const viewType = ref<ViewType>('middle')
 
-function changeNextViewType() {
+const openSearchInputOffCanvas = () => {
+  offcanvasStore.open('searchInput');
+}
+
+const changeNextViewType = () => {
   const currentIndex = viewTypes.indexOf(viewType.value)
   const nextIndex = (currentIndex + 1) % viewTypes.length
   viewType.value = viewTypes[nextIndex]
 }
 
 const goBack = () => {
-  history.back()
+  if (offcanvasStore.stack.length > 0) {
+    offcanvasStore.close()
+  } else {
+    history.back()
+  }
 }
 </script>
 

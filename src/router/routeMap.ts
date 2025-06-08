@@ -15,6 +15,8 @@ const routeMap: Record<string, () => Promise<any>> = {
 
   //search
   search: () => import('@/pages/search/SearchPage.vue'),
+  searchResult: () => import('@/pages/search/SearchResultPage.vue'),
+  searchInput: () => import('@/pages/search/SearchInputPage.vue'),
 
   //login
   login: () => import('@/pages/auth/LoginPage.vue'),

@@ -6,6 +6,8 @@ const menuList = {
   alarm: false,
   setting: false,
   basket: false,
+  searching: false,
+  inputKeyword: false,
 }
 
 //메인로고자리 대체 문자
@@ -22,6 +24,8 @@ const routerList = {
   user: ['back', 'mainTitle', 'alarm', 'setting', 'basket'],
   alarm: ['back', 'mainTitle', 'alarm', 'basket'],
   superCredit: ['back', 'mainTitle', 'basket'],
+  searchInput: ['back', 'inputKeyword', 'searching'],
+  searchResult: ['back', 'inputKeyword', 'searching']
 }
 type routeType = keyof typeof routerList
 
