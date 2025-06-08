@@ -62,6 +62,21 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/auth/LoginPage.vue'),
       },
       {
+        path: 'register',
+        name: 'register',
+        component: () => import('@/pages/auth/RegisterPage.vue'),
+      },
+      {
+        path: 'find-id',
+        name: 'find-id',
+        component: () => import('@/pages/auth/FindEmailPage.vue'),
+      },
+      {
+        path: 'find-password',
+        name: 'find-password',
+        component: () => import('@/pages/auth/FindPasswordPage.vue'),
+      },
+      {
         path: 'event',
         name: 'event',
         component: () => import('@/pages/event/EventPage.vue'),
