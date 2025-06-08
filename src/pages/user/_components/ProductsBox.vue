@@ -2,7 +2,7 @@
   <div class="w-full rounded-2xl bg-white p-3">
     <div class="my-2 flex gap-2">
       <p class="font-gmarket-bold text-lg">{{ title }}</p>
-      <p class="text-primary-400 font-gmarket-bold text-lg">{{ cnt }}</p>
+      <p class="text-primary-500 font-gmarket-bold text-lg">{{ cnt }}</p>
     </div>
     <div class="flex gap-2">
       <!-- 상품 부분 -->
@@ -15,12 +15,11 @@
         />
       </div>
     </div>
-    <div
-      class="border-t-surface-50 text-surface-600 flex w-full items-center justify-center gap-1 border-t py-3"
-      @click="clickAll"
-    >
+    <div class="border-t-surface-50 text-surface-600 w-full border-t py-3" @click="clickAll">
       <!-- 모두 보기 -->
-      {{ title }} 모두 보기 <img class="h-4" :src="NavIcon" alt="전체보기 아이콘" />
+      <div class="flex cursor-pointer items-center justify-center gap-1">
+        {{ title }} 모두 보기 <img class="h-4" :src="NavIcon" alt="전체보기 아이콘" />
+      </div>
     </div>
   </div>
 </template>
