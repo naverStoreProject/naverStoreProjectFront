@@ -10,7 +10,7 @@
           v-model="props.searchQuery"
           @click="openSearchInputOffCanvas"
         />
-        <span class="text-gray-500">🔍</span>
+        <span class="text-surface-300">🔍</span>
       </div>
 
       <div class="filters pt-2">
