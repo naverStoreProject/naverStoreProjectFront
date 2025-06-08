@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col gap-2 rounded-2xl bg-white p-4">
     <div class="flex items-center justify-between">
-      <div>
+      <div class="flex items-center">
         <span class="font-gmarket-bold text-lg">{{ order.status }}</span>
         <span v-if="isBeforeAutoConfirm" class="text-surface-300 font-gmarket-light ml-2">
           {{ formattedDate }} 자동 구매확정 예정
@@ -27,7 +27,7 @@
           <span class="text-secondary-500 cursor-pointer text-base" @click="gotoDetail"
             >상세보기 ></span
           >
-          <span class="text-surface-300 cursor-pointer" @click="gotoQna"
+          <span class="text-surface-400 cursor-pointer" @click="gotoQna"
             >{{ order.company }} 문의 ></span
           >
         </div>
@@ -61,7 +61,7 @@ import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import NpayIcon from '@/assets/image/shortcut/delivery.png'
-import CloseIcon from '@/assets/closeIcon.svg'
+import CloseIcon from '@/assets/image/icons/closeIcon.svg'
 import type { OrderItem } from '../orders/OrderData'
 
 const props = defineProps<{ order: OrderItem }>()
