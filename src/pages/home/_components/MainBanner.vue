@@ -1,15 +1,11 @@
 <template>
-  {{ props.title }}
+  {{ props.mbanner.title }}
 </template>
 
 <script setup lang="ts">
-
-  const props = defineProps<{
-    title: title
-  }>()
-
+const props = defineProps<{
+  mbanner: mbanner
+}>()
 </script>
 
-<style scoped>
-
-</style>
+<style scoped></style>
