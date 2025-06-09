@@ -23,15 +23,15 @@ import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
 import mbanners from '@/api/mainBanner.ts'
 
 import { ref, onMounted } from 'vue'
-import MainBanner from '@/pages/home/_components/MainBanner.vue'
+import type { MainBanner } from '@/types/mainBanner.ts'
 
-const mbData = ref([])
+const mbData = ref<MainBanner[]>([])
 
 //데이터 가져오기
 onMounted(async () => {
   try {
     const response = await mbanners.getAllbanners()
-    if (response.success == true) {
+    if (response.success) {
       mbData.value = response.data
     } else {
       console.log(response.message)
