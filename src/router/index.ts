@@ -27,7 +27,7 @@ const routes: RouteRecordRaw[] = [
           {
             path: 'for-you',
             name: 'for-you-home',
-            component: routeMap.forYou,
+            component: () => import('@/pages/home/_components/ForYouList.vue'),
           },
           {
             path: 'best',

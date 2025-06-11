@@ -15,31 +15,17 @@
   <MainShortcutBar />
 
   <!-- 컨텐츠들 -->
+  <HomeInterest />
+
+  <HomeTodaySale />
 </template>
 
 <script setup lang="ts">
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
-import mbanners from '@/api/mainBanner.ts'
+import HomeInterest from './HomeInterest.vue'
+import HomeTodaySale from './HomeTodaySale.vue'
 
-import { ref, onMounted } from 'vue'
-import type { MainBanner } from '@/types/mainBanner.ts'
-
-const mbData = ref<MainBanner[]>([])
-
-//데이터 가져오기
-onMounted(async () => {
-  try {
-    const response = await mbanners.getAllbanners()
-    if (response.success) {
-      mbData.value = response.data
-    } else {
-      console.log(response.message)
-    }
-  } catch (error) {
-    console.log(error)
-  }
-})
 
 //임시 로그인
 const isLogin = true
