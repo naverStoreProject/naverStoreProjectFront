@@ -9,15 +9,43 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue'
+import { computed, defineAsyncComponent, onMounted, onUnmounted } from 'vue'
+import { useRoute } from 'vue-router'
 import Header from '@/components/layouts/header/Header.vue'
 import type { routeType } from '@/components/layouts/header/header'
 
 import { routeMap } from '@/router/routeMap'
 
 import { useOffcanvasStore } from '@/stores/offcanvasStore'
+import { useSearchPageOffcanvasCountStore } from '@/stores/searchPageOffcanvasCountStore';
+
+const route = useRoute()
 
 const offcanvasStore = useOffcanvasStore()
+const searchPageOffcanvasCountStore = useSearchPageOffcanvasCountStore()
+
+
+const isSearchRelatedOffcanvas = computed(() => {
+  const name = props.menu.name
+  return (name === 'searchInput' || name === 'searchResult')
+});
+
+// 오프캔버스가 DOM에 추가될 때 (열림)
+onMounted(() => {
+  if (route.path === '/search' && isSearchRelatedOffcanvas.value) {
+    searchPageOffcanvasCountStore.increment()
+    console.log('search offcanvas count 증가')
+  }
+});
+
+// 오프캔버스가 DOM에서 제거되기 직전 (닫힘)
+onUnmounted(() => {
+  if (route.path === '/search' && isSearchRelatedOffcanvas.value) {
+    searchPageOffcanvasCountStore.decrement()
+    console.log('search offcanvas count 감소')
+  }
+});
+
 
 const currentPage = computed(() => {
   const component = routeMap[props.menu]

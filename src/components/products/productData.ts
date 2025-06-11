@@ -1,14 +1,37 @@
-export interface Product {
-  id: string
+////////////////// Product 2 /////////////////////
+
+export interface Product2 {
+  id: number
   brand: string
   name: string
   image: string
-  originalPrice?: string
-  currentPrice: string
-  discountRate?: string
+  description: string
+  stockQuantity: number
+  originalPrice: number
+  discountRate: number
+  currentPrice: number
+  averageRating: number
+  ratingCount: number
+  category: number
+}
+
+
+
+
+
+////////////////// Product 1 /////////////////////
+
+export interface Product {
+  id: string              // Number
+  brand: string
+  name: string
+  image: string
+  originalPrice?: string  // Number
+  currentPrice: string    // Number
+  discountRate?: string   // Number
   adTag: boolean
-  averageRating: string
-  ratingCount: string
+  averageRating: string   // Number
+  ratingCount: string     // Number
 }
 
 export const products: Product[] = [

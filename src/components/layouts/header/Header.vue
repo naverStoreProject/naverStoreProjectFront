@@ -11,6 +11,15 @@
         <div v-if="routeMenuList.mainTitle">
           <div v-text="mainTitle"></div>
         </div>
+        <div v-if="routeMenuList.inputKeyword">
+          <input
+            type="text"
+            placeholder="상품명 또는 브랜드 입력"
+            class="flex-1 border-b p-2 outline-none"
+            v-model="searchKeyword"
+            @keyup.enter="openSearchOffCanvas"
+          />
+        </div>
       </div>
       <!-- header-left end -->
 
@@ -27,6 +36,9 @@
         </div>
         <div v-if="routeMenuList.basket" class="header-right__basket">
           <i class="fa-solid fa-bag-shopping"></i>
+        </div>
+        <div v-if="routeMenuList.searching" class="header-right__" @click="openSearchOffCanvas">
+          <i class="fa-solid fa-magnifying-glass"></i>
         </div>
       </div>
       <!-- header-right end -->
@@ -55,6 +67,7 @@ const offcanvasStore = useOffcanvasStore()
 const mainTitle = ref('')
 const routeMenuList = ref({ ...menuList })
 const routeMainTitleList = ref({ ...mainTitleList })
+const searchKeyword = ref('')
 
 //뒤로가기 버튼 설정
 const backBtnFunc = () => {
@@ -63,6 +76,19 @@ const backBtnFunc = () => {
     offcanvasStore.close()
   } else {
     router.back()
+  }
+}
+
+const openSearchOffCanvas = () => {
+  if(props.menu == 'searchInput') {
+    // props로 searchKeyword 전달 필요
+    offcanvasStore.open('searchResult')
+    return
+  }
+  if(props.menu == 'searchResult') {
+    // props로 searchKeyword 전달 필요
+    offcanvasStore.open('searchInput')
+    return
   }
 }
 
