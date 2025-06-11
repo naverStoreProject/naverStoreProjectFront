@@ -1,8 +1,8 @@
 <template>
   <!-- 광고 미정 -->
   <div class="news">
-    <template v-for="data in mbData" :key="mb.id">
-      <MainBanner :mbanner="data"></MainBanner>
+    <template v-for="mb in mbData" :key=mb.id>
+      <MainBanner :MainBanner="mb"></MainBanner>
     </template>
   </div>
 
@@ -20,17 +20,18 @@
 <script setup lang="ts">
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
-import mbanners from '@/api/mainBanner.ts'
+import mainBannerApi from '@/api/mainBanner.ts'
+import MainBanner from './MainBanner.vue'
 
 import { ref, onMounted } from 'vue'
-import type { MainBanner } from '@/types/mainBanner.ts'
+import type { MainBannerType } from '@/types/mainBanner.ts'
 
-const mbData = ref<MainBanner[]>([])
+const mbData = ref<MainBannerType[]>([])
 
 //데이터 가져오기
 onMounted(async () => {
   try {
-    const response = await mbanners.getAllbanners()
+    const response = await mainBannerApi.getAllbanners()
     if (response.success) {
       mbData.value = response.data
     } else {
