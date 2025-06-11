@@ -1,10 +1,12 @@
 <template>
-  {{ props.mbanner.title }}
+  {{ props.MainBanner }}
 </template>
 
 <script setup lang="ts">
+import type { MainBannerType } from '@/types/mainBanner';
+
 const props = defineProps<{
-  mbanner: mbanner
+  MainBanner: MainBannerType
 }>()
 </script>
 

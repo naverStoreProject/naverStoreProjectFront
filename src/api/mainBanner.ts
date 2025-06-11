@@ -1,13 +1,14 @@
 import axios, { type AxiosResponse } from 'axios'
-import type { MainBannersResponse, MainBannerResponse } from '@/types/api.ts'
+import type { MainBannerType } from '@/types/mainBanner'
+import type { ApiResponse } from '@/types/api.ts'
 
 // 배너 데이터 가져오기
-const mbanners = {
+const mainBannerApi = {
   //모두 가져오기
-  getAllbanners: async (): Promise<MainBannersResponse> => {
+  getAllbanners: async (): Promise<ApiResponse<MainBannerType[]>> => {
     try {
       const apiUrl = '/api/mainBanners'
-      const response: AxiosResponse<MainBannersResponse> = await axios.get(apiUrl)
+      const response: AxiosResponse<ApiResponse<MainBannerType[]>> = await axios.get(apiUrl)
       return response.data
     } catch (error) {
       console.log(error)
@@ -16,10 +17,10 @@ const mbanners = {
   },
 
   //하나만 가져오기
-  getMainBanner: async (id: number): Promise<MainBannerResponse> => {
+  getMainBanner: async (id: number): Promise<ApiResponse<MainBannerType>> => {
     try {
       const apiUrl = `/api/mainBanners/${id}`
-      const response: AxiosResponse<MainBannerResponse> = await axios.get(apiUrl)
+      const response: AxiosResponse<ApiResponse<MainBannerType>> = await axios.get(apiUrl)
       return response.data
     } catch (error) {
       throw error
@@ -27,4 +28,4 @@ const mbanners = {
   },
 }
 
-export default mbanners
+export default mainBannerApi

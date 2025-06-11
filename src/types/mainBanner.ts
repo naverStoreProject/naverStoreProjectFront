@@ -1,4 +1,4 @@
-export interface MainBanner {
+export interface MainBannerType {
   id: number
   title: string
   semi_title: string

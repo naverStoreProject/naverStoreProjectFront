@@ -9,6 +9,7 @@
 </template>
 
 <script setup lang="ts">
+
 import { computed, defineAsyncComponent } from 'vue'
 import Header from '@/components/layouts/header/Header.vue'
 import type { routeType } from '@/components/layouts/header/header'
