@@ -43,9 +43,6 @@
           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.644 7.707H3.356a.877.877 0 00-.854 1.077L4.662 18a3.508 3.508 0 003.416 2.707h7.845A3.508 3.508 0 0019.337 18l2.16-9.216a.877.877 0 00-.854-1.077z"></path>
         </svg>
         </div>
-        <div v-if="routeMenuList.searching" class="header-right__" @click="openSearchOffCanvas">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </div>
       </div>
       <!-- header-right end -->
     </div>

@@ -25,6 +25,7 @@ import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
 import HomeInterest from './HomeInterest.vue'
 import HomeTodaySale from './HomeTodaySale.vue'
+
 import mainBannerApi from '@/api/mainBanner.ts'
 import MainBanner from './MainBanner.vue'
 
