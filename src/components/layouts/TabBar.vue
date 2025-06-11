@@ -17,7 +17,7 @@
 <script setup lang="ts">
 //bottom-nav 리스트
 const bottomNavList = [
-  { name: '홈', router: 'home', src: '' },
+  { name: '홈', router: 'main-home', src: '' },
   { name: '발견', router: 'home', src: '' },
   { name: '카테고리', router: 'category', src: '' },
   { name: '검색', router: 'search', src: '' },
@@ -27,7 +27,7 @@ const bottomNavList = [
 
 <style>
 .bottom-nav {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -43,6 +43,6 @@ const bottomNavList = [
   justify-content: center;
   text-align: center;
   max-width: 2.5rem;
-  width:100%;
+  width: 100%;
 }
 </style>
