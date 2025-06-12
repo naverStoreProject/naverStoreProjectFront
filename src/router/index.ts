@@ -25,10 +25,10 @@ const routes: RouteRecordRaw[] = [
             name: 'deal-home',
             component: routeMap.todayDeal,
           },
-          {
+          { 
             path: 'for-you',
             name: 'for-you-home',
-            component: () => import('@/pages/home/_components/ForYouList.vue'),
+            component: routeMap.forYou,
           },
           {
             path: 'best',

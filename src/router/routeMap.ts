@@ -8,7 +8,7 @@ const routeMap: Record<string, () => Promise<any>> = {
   cardNews: () => import('@/pages/home/_components/CardNews.vue'),
   delivery: () => import('@/pages/home/_components/Delivery.vue'),
   fashionBeauty: () => import('@/pages/home/_components/FashionBeauty.vue'),
-  forYou: () => import('@/pages/home/_components/ForYou.vue'),
+  forYou: () => import('@/pages/home/_components/ForYouList.vue'),
   // productList: () => import('@/pages/home/_components/ProductList.vue'),
   todaySale: () => import('@/pages/home/_components/TodaySale.vue'),
   todayDeal: () => import('@/pages/home/_components/TodayDeal.vue'),
