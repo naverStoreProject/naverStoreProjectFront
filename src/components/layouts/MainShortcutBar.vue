@@ -1,9 +1,16 @@
 <template>
-  <div class="overflow-x-auto scrollbar-none w-full">
+  <div class="scrollbar-none w-full overflow-x-auto">
     <div class="shorcut-box">
       <div v-for="list in shorcutList" class="shortcut-item" @click="clickShortcut(list.name)">
-        <div class="flex flex-col items-center text-xs">
-          <div class="shortcut-item__img"></div>
+        <div class="flex flex-col items-center">
+          <Icon
+            background="trans"
+            :icon="shorcutImg[list.name]"
+            rounded="xl"
+            size="lg"
+            sorting="horizon"
+            label=""
+          />
           <div v-text="list.title" class="shortcut-item__text"></div>
         </div>
       </div>
@@ -18,6 +25,10 @@
 <script setup>
 import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
+//아이콘 가져오기
+import Icon from '@/components/icons/Icon.vue'
+import shorcutImg from '@/assets/image/shortcut/shorcutImg'
+
 const offcanvasStore = useOffcanvasStore()
 
 const clickShortcut = name => {
@@ -31,7 +42,7 @@ const clickShortcut = name => {
 const shorcutList = [
   { title: '슈퍼적립', open: 'offcanvas', name: 'superCredit' },
   { title: 'N배송', open: 'offcanvas', name: 'delivery' },
-  { title: '쇼핑라이브', open: 'offcanvas', name: 'shopingLive' },
+  { title: '쇼핑라이브', open: 'offcanvas', name: 'shoppingLive' },
   { title: '패션타운', open: 'offcanvas', name: 'fashionTown' },
   { title: '장보기', open: 'offcanvas', name: 'market' },
   { title: '원쁠딜', open: 'offcanvas', name: 'onePlus' },

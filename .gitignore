@@ -29,3 +29,8 @@ coverage
 *.tsbuildinfo
 
 *storybook.log
+
+
+# evn Settings
+.env
+.env.*

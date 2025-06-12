@@ -1,7 +1,7 @@
 <template>
   <div
     :class="[
-      'flex w-fit items-center justify-center gap-2',
+      'flex w-fit items-center justify-center',
       sorting === 'vertical' && 'flex-col',
       sorting === 'horizon' && 'flex-row',
       $attrs.class,
@@ -35,7 +35,8 @@ defineProps<{
   label: string
   explain?: string
   background: 'surface' | 'trans'
-  size: 'sm' | 'md'
+  size: 'sm' | 'md' | 'lg'
   sorting: 'vertical' | 'horizon'
+  rounded: 'md' | 'lg' | 'xl' | 'full'
 }>()
 </script>

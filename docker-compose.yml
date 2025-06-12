@@ -2,9 +2,10 @@ version: '3.8'
 
 services:
   frontend:
+    container_name: naverStoreProjectFront
     build: .
     ports:
-      - "5173:5173"
+      - '5173:5173'
     volumes:
       - .:/app:delegated
       - /app/node_modules
@@ -18,4 +19,4 @@ services:
       - my-network
 
 networks:
-  my-network: 
+  my-network:
