@@ -1,10 +1,10 @@
 <template>
-  <div class="space-x-2 text-center text-sm text-gray-500">
-    <RouterLink to="/find-password" class="hover:underline">비밀번호 찾기</RouterLink>
+  <div class="mt-6 flex items-center justify-center gap-2 text-sm text-gray-500">
+    <RouterLink to="/find-password" class="px- block hover:underline">비밀번호 찾기</RouterLink>
     <span>|</span>
-    <RouterLink to="/find-id" class="hover:underline">아이디 찾기</RouterLink>
+    <RouterLink to="/find-email" class="block px-1 hover:underline">이메일 찾기</RouterLink>
     <span>|</span>
-    <RouterLink to="/register" class="hover:underline">회원가입</RouterLink>
+    <RouterLink to="/register" class="block px-1 hover:underline">회원가입</RouterLink>
   </div>
 </template>
 

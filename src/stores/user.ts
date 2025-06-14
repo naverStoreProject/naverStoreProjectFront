@@ -12,8 +12,8 @@ export const useUserStore = defineStore('user', {
       try {
         const res = await axios.post('/api/login', { email, password })
 
-        this.token = res.data.token
-        this.user = res.data.user
+        this.token = res.data.data.accessToken
+        this.user = null
 
         // JWT 토큰을 localStorage에 저장
         localStorage.setItem('token', this.token)
