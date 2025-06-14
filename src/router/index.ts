@@ -67,8 +67,8 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/pages/auth/RegisterPage.vue'),
       },
       {
-        path: 'find-id',
-        name: 'find-id',
+        path: 'find-email',
+        name: 'find-email',
         component: () => import('@/pages/auth/FindEmailPage.vue'),
       },
       {

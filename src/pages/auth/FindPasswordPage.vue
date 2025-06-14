@@ -1,21 +1,49 @@
 <template>
-  <AuthFormBox title="비밀번호 찾기">
-    <form @submit.prevent="onSubmit" class="space-y-4">
-      <AuthInput v-model="name" placeholder="이름" :error-message="nameError" />
-      <AuthInput v-model="email" placeholder="이메일" :error-message="emailError" />
-      <BaseBtn
-        :label="isLoading ? '조회 중...' : '비밀번호 찾기'"
-        color="primary"
-        size="md"
-        rounded="lg"
-        :disabled="isLoading"
-      />
-    </form>
+  <div class="flex min-h-screen flex-col items-center justify-center bg-white">
+    <!-- 로고 영역 (빈공간) -->
+    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
 
-    <template #footer>
-      <AuthFooterLinks />
-    </template>
-  </AuthFormBox>
+    <!-- 로그인 박스 -->
+    <div class="w-[400px] rounded-md border bg-white p-8 shadow">
+      <!-- 탭 (디자인만) -->
+
+      <!-- 입력 필드 -->
+      <div class="space-y-4">
+        <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
+        <AuthInput
+          v-model="nickname"
+          type="text"
+          placeholder="별명"
+          :error-message="nicknameError"
+        />
+        <AuthInput v-model="email" type="text" placeholder="이메일" :error-message="emailError" />
+        <AuthInput v-model="phone" type="text" placeholder="전화번호" :error-message="phoneError" />
+
+        <div class="text-sm text-gray-600"></div>
+      </div>
+
+      <!-- 로그인 버튼 -->
+      <BaseBtn
+        :label="isLoading ? '비밀번호 찾는 중...' : '비밀번호 찾기'"
+        color="primary"
+        size="lg"
+        rounded="lg"
+        class="mt-7 w-full"
+        :disabled="isLoading"
+        @click="onSubmit"
+      />
+    </div>
+
+    <!-- 하단 링크 -->
+    <AuthFooterLinks />
+
+    <!-- 배너 (임시 빈공간) -->
+    <div
+      class="mt-10 flex h-[100px] w-[600px] items-center justify-center bg-gray-100 text-gray-400"
+    >
+      배너 영역
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -27,10 +55,14 @@ import BaseBtn from '@/components/buttons/BaseBtn.vue'
 // 입력 상태
 const name = ref('')
 const email = ref('')
+const nickname = ref('')
+const phone = ref('')
 
 // 에러 메시지
 const nameError = ref('')
 const emailError = ref('')
+const nicknameError = ref('')
+const phoneError = ref('')
 
 const isLoading = ref(false)
 
@@ -53,6 +85,20 @@ const validate = () => {
     valid = false
   } else {
     emailError.value = ''
+  }
+
+  if (!nickname.value.trim()) {
+    nicknameError.value = '별명을 입력해주세요.'
+    valid = false
+  } else {
+    nicknameError.value = ''
+  }
+
+  if (!phone.value.trim()) {
+    phoneError.value = '전화번호를 입력해주세요.'
+    valid = false
+  } else {
+    phoneError.value = ''
   }
 
   return valid
