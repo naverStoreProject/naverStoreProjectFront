@@ -53,7 +53,7 @@
   2. 특정 path값을 props 를 통해 주입시켰을때 (우선)
 */
 import { useRoute, useRouter } from 'vue-router'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import routeUtil from '@/utils/route'
 
 import type { routeType } from './header'
@@ -69,6 +69,13 @@ const routeMenuList = ref({ ...menuList })
 const routeMainTitleList = ref({ ...mainTitleList })
 const searchKeyword = ref('')
 
+onMounted(() => {
+  if (props.data !== undefined) {
+    searchKeyword.value = String(props.data);
+  }
+});
+
+
 //뒤로가기 버튼 설정
 const backBtnFunc = () => {
   //오프캔버스면 창닫기
@@ -82,12 +89,12 @@ const backBtnFunc = () => {
 const openSearchOffCanvas = () => {
   if(props.menu == 'searchInput') {
     // props로 searchKeyword 전달 필요
-    offcanvasStore.open('searchResult')
+    offcanvasStore.open('searchResult', searchKeyword.value)
     return
   }
   if(props.menu == 'searchResult') {
     // props로 searchKeyword 전달 필요
-    offcanvasStore.open('searchInput')
+    offcanvasStore.open('searchInput', searchKeyword.value)
     return
   }
 }
@@ -95,6 +102,7 @@ const openSearchOffCanvas = () => {
 //header 강제
 const props = defineProps<{
   menu: routeType
+  data?: any
 }>()
 
 //헤더 리셋
