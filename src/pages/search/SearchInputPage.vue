@@ -1,17 +1,5 @@
 <template>
   <div class="space-y-6 p-4 text-sm">
-    <!-- 검색창 상단 -->
-    <div class="flex items-center space-x-2">
-      <button @click="goBack" class="text-lg">←</button>
-      <input
-        type="text"
-        placeholder="상품명 또는 브랜드 입력"
-        class="border-b p-2 outline-none"
-        v-model="searchQuery"
-        @keyup.enter="openSearchResultOffCanvas"
-      />
-      <span class="text-gray-500" @click="openSearchResultOffCanvas">🔍</span>
-    </div>
 
     <!-- 최근 검색어 -->
     <div>
