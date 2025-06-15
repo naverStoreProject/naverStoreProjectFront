@@ -16,7 +16,7 @@
         {{ user.balance.toLocaleString() }}원
       </div>
     </div>
-    <IconsBox />
+    <IconsBox :wish-num="user.wishNum" />
     <div class="flex w-full justify-between rounded-2xl bg-white px-3 py-5">
       <Icon
         background="trans"
@@ -46,11 +46,43 @@ import Icon from '@/components/icons/Icon.vue'
 import BaseIcon from '@/components/icons/BaseIcon.vue'
 import IconsBox from './_components/IconsBox.vue'
 import ProductsBox from './_components/ProductsBox.vue'
+import { reactive, onMounted, nextTick } from 'vue'
+import { getMyInfo } from '@/api/userApi.ts'
+import type { UserInfo } from '@/api/types/user.types'
 
 const router = useRouter()
 
 const notice = { title: '네이버 스마트스토어 사칭 피싱 주의 안내', link: 'notice' }
-const user = { nickname: '승에이', balance: 3590 }
+// const user = { nickname: '승에이', balance: 3590 }
+const user = reactive<UserInfo>({
+  name: '',
+  nickname: '',
+  email: '',
+  phone: '',
+  address: '',
+  wishNum: 0,
+  balance: 3590,
+})
+
+onMounted(async () => {
+  const response = await getMyInfo()
+  if (response?.success) {
+    const data = response.data
+    user.name = data.name
+    user.nickname = data.nickname
+    user.email = data.email
+    user.phone = data.phone
+    user.address = data.address
+    user.wishNum = data.wishNum
+  } else {
+    localStorage.removeItem('token')
+
+    router.replace({
+      name: 'Login',
+      query: { redirect: router.currentRoute.value.fullPath },
+    })
+  }
+})
 
 function clickNotice() {
   router.push({ name: notice.link })

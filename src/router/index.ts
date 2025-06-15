@@ -109,6 +109,7 @@ const routes: RouteRecordRaw[] = [
         path: 'user',
         name: 'user',
         component: routeMap.user,
+        meta: { requiresAuth: true },
         children: [
           {
             path: '',
@@ -160,6 +161,17 @@ const router = createRouter({
     }
     return { top: 0, behavior: 'smooth' }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token')
+
+  if (to.meta.requiresAuth && !token) {
+    // 인증이 필요한데 토큰이 없는 경우 → 로그인 페이지로
+    next({ name: 'login', query: { redirect: to.fullPath } })
+  } else {
+    next()
+  }
 })
 
 export default router

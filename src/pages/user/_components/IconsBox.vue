@@ -27,13 +27,18 @@
 
 <script setup lang="ts">
 import Icon from '@/components/icons/Icon.vue'
+import { computed } from 'vue'
 
-const iconItems1 = [
+const props = defineProps<{
+  wishNum: number
+}>()
+
+const iconItems1 = computed(() => [
   { label: '주문/배송내역', icon: 'src/assets/logo.svg', explain: '0' },
-  { label: '찜한상품', icon: 'src/assets/logo.svg', explain: '1' },
+  { label: '찜한상품', icon: 'src/assets/logo.svg', explain: String(props.wishNum) },
   { label: '리뷰작성', icon: 'src/assets/logo.svg', explain: '850원' },
   { label: '관심스토어', icon: 'src/assets/logo.svg', explain: '76' },
-]
+])
 
 const iconItems2 = [
   { label: '보유쿠폰', icon: 'src/assets/logo.svg' },
