@@ -17,7 +17,8 @@
             placeholder="상품명 또는 브랜드 입력"
             class="flex-1 border-b p-2 outline-none"
             v-model="searchKeyword"
-            @keyup.enter="openSearchOffCanvas"
+            @keyup.enter="navigateToSearchResult"
+            @click="navigateToSearchInput"
           />
         </div>
       </div>
@@ -91,18 +92,20 @@ const backBtnFunc = () => {
   }
 }
 
-const openSearchOffCanvas = () => {
+// 검색 입력 페이지에서 검색어 입력 후 enter -> 검색 결과 페이지로 이동
+const navigateToSearchResult  = () => {
   if(props.menu == 'searchInput') {
-    // props로 searchKeyword 전달 필요
     offcanvasStore.open('searchResult', searchKeyword.value)
     return
   }
-  if(props.menu == 'searchResult') {
-    // props로 searchKeyword 전달 필요
-    offcanvasStore.open('searchInput', searchKeyword.value)
-    return
-  }
 }
+
+// 검색 결과 페이지에서 검색창 click -> 검색 입력 페이지로 이동
+const navigateToSearchInput  = () => {
+  if (props.menu === 'searchResult') {
+    offcanvasStore.open('searchInput', searchKeyword.value);
+  }
+};
 
 //header 강제
 const props = defineProps<{
@@ -136,6 +139,8 @@ const checkMainTitle = (name: string = 'home') => {
     mainTitle.value = ''
   }
 }
+
+
 
 //route가 바뀔때마다 실행
 watch(
