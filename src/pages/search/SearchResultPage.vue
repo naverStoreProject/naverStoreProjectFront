@@ -1,17 +1,6 @@
 <template>
   <div class="container">
     <header class="header">
-      <div class="flex items-center space-x-2">
-        <button @click="goBack" class="text-lg">←</button>
-        <input
-          type="text"
-          placeholder="상품명 또는 브랜드 입력"
-          class="flex-1 border-b p-2 outline-none"
-          v-model="props.searchQuery"
-          @click="openSearchInputOffCanvas"
-        />
-        <span class="text-surface-300">🔍</span>
-      </div>
 
       <div class="filters pt-2">
         <button @click="changeNextViewType">정렬 방식</button>

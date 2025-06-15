@@ -5,7 +5,7 @@
       <TabBar />
     </main>
   </div>
-  <Offcanvas v-for="(item, index) in offcanvasStore.stack" :key="index" :menu="item" :index="index">
+  <Offcanvas v-for="(item, index) in offcanvasStore.stack" :key="index" :menu="item.routeType" :data="item.data" :index="index">
   </Offcanvas>
 </template>
 
