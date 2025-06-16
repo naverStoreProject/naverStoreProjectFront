@@ -11,7 +11,7 @@
 
 <script setup lang="ts">
 import TabBar from '@/components/layouts/TabBar.vue'
-import Offcanvas from '../offcanvas/Offcanvas.vue'
+import Offcanvas from '../offcanvas/offcanvas.vue'
 import { useOffcanvasStore } from '@/stores/offcanvasStore'
 
 const offcanvasStore = useOffcanvasStore()

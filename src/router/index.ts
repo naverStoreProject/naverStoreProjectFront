@@ -25,7 +25,7 @@ const routes: RouteRecordRaw[] = [
             name: 'deal-home',
             component: routeMap.todayDeal,
           },
-          {
+          { 
             path: 'for-you',
             name: 'for-you-home',
             component: routeMap.forYou,
