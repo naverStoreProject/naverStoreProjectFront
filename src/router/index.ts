@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import type { RouteRecordRaw } from 'vue-router'
 import AppLayout from '@/components/layouts/AppLayout.vue'
 import Page404 from '@/pages/notfound/Page404.vue'
+import { routeMap } from '@/router/routeMap'
+import meta from '@/stories/BaseBtn.stories'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -11,55 +13,55 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/',
         name: 'home',
-        component: () => import('@/pages/home/HomePage.vue'),
+        component: routeMap.homePage,
         children: [
           {
             path: '/',
             name: 'main-home',
-            component: () => import('@/pages/home/_components/HomeMain.vue'),
+            component: routeMap.homeMain,
           },
           {
             path: 'deal',
             name: 'deal-home',
-            component: () => import('@/pages/home/_components/TodayDeal.vue'),
+            component: routeMap.todayDeal,
           },
-          {
+          { 
             path: 'for-you',
             name: 'for-you-home',
-            component: () => import('@/pages/home/_components/ForYou.vue'),
+            component: routeMap.forYou,
           },
           {
             path: 'best',
             name: 'best-home',
-            component: () => import('@/pages/home/_components/BestItem.vue'),
+            component: routeMap.bestItem,
           },
           {
             path: 'delivery',
             name: 'delivery-home',
-            component: () => import('@/pages/home/_components/Delivery.vue'),
+            component: routeMap.delivery,
           },
           {
             path: 'fashion',
             name: 'fashion-home',
-            component: () => import('@/pages/home/_components/FashionBeauty.vue'),
+            component: routeMap.fashionBeauty,
           },
           {
             path: 'sale',
             name: 'sale-home',
-            component: () => import('@/pages/home/_components/TodaySale.vue'),
+            component: routeMap.todaySale,
           },
         ],
       },
       {
         path: 'search',
         name: 'search',
-        component: () => import('@/pages/search/SearchPage.vue'),
+        component: routeMap.search,
         meta: { useHeader: false },
       },
       {
         path: 'login',
         name: 'login',
-        component: () => import('@/pages/auth/LoginPage.vue'),
+        component: routeMap.login,
       },
       {
         path: 'register',
@@ -79,79 +81,84 @@ const routes: RouteRecordRaw[] = [
       {
         path: 'event',
         name: 'event',
-        component: () => import('@/pages/event/EventPage.vue'),
+        component: routeMap.event,
       },
       {
         path: 'cart',
         name: 'cart',
-        component: () => import('@/pages/cart/CartPage.vue'),
+        component: routeMap.cart,
       },
       {
         path: 'category',
         name: 'category',
-        component: () => import('@/pages/category/CategoryPage.vue'),
-        meta: { useHeader: true },
+        component: routeMap.category,
+        meta: { useHeader: false },
       },
-
       {
-        path: '/category/:categoryId/:subCategoryId',
+        path: 'category/:subCategoryId',
         name: 'category-detail',
-        component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
-        meta: { useHeader: true },
+        // component: () => import('@/pages/category/_components/SubCategoryDetail.vue'),
+        component: routeMap.subCategoryDetail,
+        meta: { useHeader: false },
       },
 
       {
         path: 'product-list',
         name: 'product-list',
-        component: () => import('@/pages/product/ProductListPage.vue'),
+        component: routeMap.productList,
       },
 
       {
         path: 'product-item/:itemId',
         name: 'product-item',
-        component: () => import('@/pages/product/ProductDetailPage.vue'),
+        component: routeMap.productDetail,
         children: [
           {
             path: 'review',
             name: 'item-review',
-            component: () => import('@/pages/product/ProductReviewsPage.vue'),
+            component: routeMap.productReview,
           },
         ],
       },
       {
         path: 'user',
         name: 'user',
-        component: () => import('@/pages/user/MypagePage.vue'),
+        component: routeMap.user,
         children: [
           {
             path: '',
             name: 'mypage',
-            component: () => import('@/pages/user/MypageListPage.vue'),
+            component: routeMap.mypage,
           },
           {
             path: 'orders',
             name: 'orders',
-            component: () => import('@/pages/user/orders/OrderListPage.vue'),
+            component: routeMap.order,
+          },
+          {
+            path: 'orders/review',
+            name: 'reviews',
+            component: routeMap.review,
           },
           {
             path: 'orders/review/:orderId',
             name: 'review',
-            component: () => import('@/pages/user/orders/ReviewPage.vue'),
+            component: routeMap.review,
           },
           {
             path: 'profile',
             name: 'profile',
-            component: () => import('@/pages/user/profile/ProfilePage.vue'),
+            component: routeMap.profile,
           },
           {
             path: 'notice',
             name: 'notice',
-            component: () => import('@/pages/user/notice/NoticeListPage.vue'),
+            component: routeMap.notice,
           },
           {
             path: 'notice/qna',
             name: 'qna',
-            component: () => import('@/pages/user/notice/QnaPage.vue'),
+            component: routeMap.qna,
           },
         ],
       },

@@ -1,19 +1,12 @@
 <template>
     <div class="container">
         <header class="header">
-            <h2>운동화</h2>
+            <input type="text" v-model="searchText" placeholder="상품명 또는 브랜드 입력" class="search-input" />
             <div class="filters">
-                <button>행사</button>
-                <button>공식인증</button>
-                <button>스타일</button>
-                <button>가격</button>
-                <button @click="toggleViewType">그리드 모양</button>
+                <button @click="changeNextViewType">정렬 방식</button>
             </div>
         </header>
-
         <ProductList :view-type="viewType" />
-
-
     </div>
 </template>
 
@@ -21,12 +14,14 @@
 import ProductList from '@/components/products/ProductList.vue'
 import { ref } from 'vue'
 
-const viewTypes = ['list', 'grid-2', 'grid-3'] as const
+const viewTypes = ['long', 'middle', 'small'] as const
+const searchText = ref('')
+
 type ViewType = (typeof viewTypes)[number]
 
-const viewType = ref<ViewType>('grid-2')
+const viewType = ref<ViewType>('middle')
 
-function toggleViewType() {
+function changeNextViewType() {
     const currentIndex = viewTypes.indexOf(viewType.value)
     const nextIndex = (currentIndex + 1) % viewTypes.length
     viewType.value = viewTypes[nextIndex]
@@ -35,21 +30,28 @@ function toggleViewType() {
 
 <style scoped>
 .container {
-    width: 960px;
-    padding-bottom: 70px;
     font-family: 'Noto Sans KR', sans-serif;
 }
 
 .header {
-    padding: 16px;
+    padding: 1rem;
     background: white;
-    border-bottom: 1px solid #eee;
+    border-bottom: 0px solid #eee;
+}
+
+.search-input {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
 }
 
 .filters {
     display: flex;
-    gap: 8px;
-    margin-top: 10px;
+    gap: 0.8rem;
+    margin-top: 0rem;
 }
 
 .filters button {
@@ -58,17 +60,5 @@ function toggleViewType() {
     padding: 6px 12px;
     border-radius: 20px;
     font-size: 14px;
-}
-
-.bottom-nav {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background: #fff;
-    border-top: 1px solid #eee;
-    display: flex;
-    justify-content: space-around;
-    padding: 10px 0;
 }
 </style>

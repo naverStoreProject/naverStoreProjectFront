@@ -11,6 +11,7 @@ const meta: Meta<typeof Icon> = {
     background: 'surface',
     size: 'md',
     sorting: 'vertical',
+    rounded: 'full',
   },
   argTypes: {
     background: {
@@ -19,11 +20,15 @@ const meta: Meta<typeof Icon> = {
     },
     size: {
       control: { type: 'radio' },
-      options: ['sm', 'md'],
+      options: ['sm', 'md', 'lg'],
     },
     sorting: {
       control: { type: 'radio' },
       options: ['vertical', 'horizon'],
+    },
+    rounded: {
+      control: { type: 'radio' },
+      options: ['md', 'lg', 'xl', 'full'],
     },
   },
   parameters: {

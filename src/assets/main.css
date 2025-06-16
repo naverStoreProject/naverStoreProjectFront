@@ -2,29 +2,62 @@
 
 @theme {
   --color-*: initial;
-  --color-primary-400: oklch(0.75 0.1105 201.04);
-  --color-primary-100: oklch(0.95 0.0313 199.09);
-  --color-secondary-300: oklch(0.81 0.1161 2.95);
-  --color-positive-700: oklch(0.52 0.2008 28.54);
-  --color-positive-500: oklch(0.65 0.2223 26.75);
-  --color-negative-700: oklch(0.59 0.1881 255.01);
-  --color-negative-500: oklch(0.72 0.1576 241.38);
+  /* 현재 색상은 200, 500, 900만 사용 */
+  /* --color-primary-100: oklch(0.9304 0.0463 317.08); */
+  --color-primary-200: oklch(0.8636 0.0901 314.09);
+  /* --color-primary-300: oklch(0.786 0.1322 311.48); */
+  /* --color-primary-400: oklch(0.7197 0.1597 308.55); */
+  --color-primary-500: oklch(0.6244 0.1999 304.85);
+  /* --color-primary-600: oklch(0.5269 0.1912 301.25); */
+  /* --color-primary-700: oklch(0.4375 0.1783 297.45); */
+  /* --color-primary-800: oklch(0.3553 0.1588 292.81); */
+  --color-primary-900: oklch(0.2946 0.144 287.78);
+  /* --color-secondary-100: oklch(0.9761 0.0346 136.01); */
+  --color-secondary-200: oklch(0.9533 0.0725 138.4);
+  /* --color-secondary-300: oklch(0.9189 0.1097 140.95); */
+  /* --color-secondary-400: oklch(0.8835 0.1373 142.95); */
+  --color-secondary-500: oklch(0.8389 0.1741 144.37);
+  /* --color-secondary-600: oklch(0.7401 0.1677 145.95); */
+  /* --color-secondary-700: oklch(0.6448 0.1541 147.55); */
+  /* --color-secondary-800: oklch(0.5461 0.1336 149.04); */
+  --color-secondary-900: oklch(0.4751 0.1168 151.08);
+  /* --color-red-100: oklch(0.9298 0.0366 36.77); */
+  --color-red-200: oklch(0.8501 0.0818 28.18);
+  /* --color-red-300: oklch(0.7641 0.14 22.96); */
+  /* --color-red-400: oklch(0.7131 0.1806 19.66); */
+  --color-red-500: oklch(0.6586 0.2295 18.56);
+  /* --color-red-600: oklch(0.5847 0.2095 13.84); */
+  /* --color-red-700: oklch(0.5112 0.1877 8.28); */
+  /* --color-red-800: oklch(0.4362 0.1643 2.22); */
+  --color-red-900: oklch(0.3832 0.1481 356.48);
+  /* --color-blue-100: oklch(0.9543 0.0335 217.74); */
+  --color-blue-200: oklch(0.905 0.0646 222.59);
+  /* --color-blue-300: oklch(0.8479 0.094 230.11); */
+  /* --color-blue-400: oklch(0.7978 0.1171 237.25); */
+  --color-blue-500: oklch(0.7175 0.1568 245.88);
+  /* --color-blue-600: oklch(0.6078 0.1544 251.48); */
+  /* --color-blue-700: oklch(0.5067 0.1478 255.54); */
+  /* --color-blue-800: oklch(0.4092 0.1379 259.17); */
+  --color-blue-900: oklch(0.3387 0.1316 261.78);
   --color-surface-50: oklch(0.97 0 0);
-  --color-surface-300: oklch(0.76 0 0);
-  --color-surface-600: oklch(0.48 0 0);
-  --color-surface-950: oklch(0.21 0 0);
+  --color-surface-100: oklch(0.9642 0 0);
+  /* --color-surface-200: oklch(0.928 0 0); */
+  --color-surface-300: oklch(0.7858 0 0);
+  --color-surface-400: oklch(0.559 0 0);
+  --color-surface-500: oklch(0.209 0 0);
   --color-white: oklch(1 0 0);
   --font-gmarket-light: 'GmarketSansLight';
   --font-gmarket-medium: 'GmarketSansMedium';
   --font-gmarket-bold: 'GmarketSansBold';
 }
 
-@layer base {
-  html {
-    font-size: 16px;
-  }
+/*test*/
+.color-showing-text-class-do-not-use {
+  color: var(--color);
+}
 
-  * {
+@layer base {
+  body {
     font-size: var(--text-sm); /* 14px */
     color: var(--color-surface-950);
     font-family: 'GmarketSansMedium';
@@ -51,4 +84,8 @@
     format('woff');
   font-weight: normal;
   font-style: normal;
+}
+
+.disabled {
+  @apply text-surface-300 pointer-events-none cursor-not-allowed grayscale;
 }

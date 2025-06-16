@@ -1,8 +1,8 @@
 <template>
   <div :class="['products', viewType]">
     <ProductCard
-      v-for="(product, index) in products"
-      :key="index"
+      v-for="product in products"
+      :key="product.id"
       :product="product"
       :view-type="viewType"
     />
@@ -11,10 +11,10 @@
 
 <script setup lang="ts">
 import ProductCard from './ProductCard.vue'
-import { products } from './tmpProductData.ts'
+import { products } from './productData.ts'
 
 defineProps<{
-  viewType: 'list' | 'grid-2' | 'grid-3'
+  viewType: 'long' | 'middle' | 'small'
 }>()
 </script>
 
@@ -22,25 +22,25 @@ defineProps<{
 .products {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 16px 0;
+  justify-content: space-evenly;
+  padding: 1rem 0.5rem;
 }
 
-.products.grid-2 > * {
+.products.middle > * {
   width: 45%;
 }
 
-.products.grid-3 > * {
+.products.small > * {
   width: 30%;
 }
 
-.products.list {
+.products.long {
   flex-direction: column;
   align-items: center;
+  height: 20%;
 }
 
-.products.list > * {
+.products.long > * {
   width: 100%;
   max-width: 900px;
 }

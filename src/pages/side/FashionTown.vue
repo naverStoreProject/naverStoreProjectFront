@@ -1,5 +1,5 @@
 <template>
-  foryou
+
 </template>
 
 <script setup>
