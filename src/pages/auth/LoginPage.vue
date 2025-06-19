@@ -1,10 +1,9 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
     <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10">
-      <img :src="mainLogo" alt="MainLogo" class="h-12" />
+    <div class="logo-img mb-6">
+      <img :src="logo.mainLogo" alt="mainLogo" class="h-20 w-20" />
     </div>
-
     <!-- 로그인 박스 -->
     <div class="w-[400px] rounded-md border bg-white p-8 shadow">
       <!-- 탭 (디자인만) -->
@@ -24,7 +23,7 @@
               class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               @click="togglePassword"
             >
-              <component :is="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
+              <img :src="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
             </button>
           </template>
         </AuthInput>
@@ -69,7 +68,7 @@ import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import AuthFooterLinks from '@/pages/auth/_components/AuthFooterLinks.vue'
 import eyeOpenIcon from '@/assets/image/icons/eyeOpenIcon.svg'
 import eyeCloseIcon from '@/assets/image/icons/eyeCloseIcon.svg'
-import mainLogo from '@/assets/image/logo/mainLogo.svg'
+import logo from '@/assets/image/logo/logo'
 
 const email = ref('')
 const password = ref('')

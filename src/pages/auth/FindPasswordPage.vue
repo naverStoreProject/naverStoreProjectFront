@@ -1,7 +1,9 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
     <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
+    <div class="logo-img mb-6">
+      <img :src="logo.mainLogo" alt="mainLogo" class="h-20 w-20" />
+    </div>
 
     <!-- 로그인 박스 -->
     <div class="w-[400px] rounded-md border bg-white p-8 shadow">
@@ -51,7 +53,7 @@ import { ref } from 'vue'
 import AuthFormBox from '@/pages/auth/_components/AuthFormBox.vue'
 import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
-
+import logo from '@/assets/image/logo/logo'
 // 입력 상태
 const name = ref('')
 const email = ref('')

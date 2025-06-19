@@ -1,7 +1,9 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
     <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
+    <div class="logo-img mb-6">
+      <img :src="logo.mainLogo" alt="mainLogo" class="h-20 w-20" />
+    </div>
 
     <!-- 로그인 박스 -->
     <div class="w-[400px] rounded-md border bg-white p-8 shadow">
@@ -27,7 +29,7 @@
               class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               @click="togglePassword"
             >
-              <component :is="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
+              <img :src="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
             </button>
           </template>
         </AuthInput>
@@ -76,7 +78,7 @@ import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import eyeOpenIcon from '@/assets/image/icons/eyeOpenIcon.svg'
 import eyeCloseIcon from '@/assets/image/icons/eyeCloseIcon.svg'
-
+import logo from '@/assets/image/logo/logo'
 // 입력값
 const name = ref('')
 const nickname = ref('')
