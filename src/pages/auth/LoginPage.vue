@@ -1,7 +1,9 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
     <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
+    <div class="mb-10">
+      <img :src="mainLogo" alt="MainLogo" class="h-12" />
+    </div>
 
     <!-- 로그인 박스 -->
     <div class="w-[400px] rounded-md border bg-white p-8 shadow">
@@ -22,42 +24,7 @@
               class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
               @click="togglePassword"
             >
-              <svg
-                v-if="!isPasswordVisible"
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
-                />
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M2.458 12C3.732 7.943 7.523 5 12 5c4.477 0 8.268 2.943 9.542 7-1.274 4.057-5.065 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
-                />
-              </svg>
-              <svg
-                v-else
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13.875 18.825A10.05 10.05 0 0112 19c-4.477 0-8.268-2.943-9.542-7a10.056 10.056 0 012.442-4.158M9.88 9.88a3 3 0 104.24 4.24M6.1 6.1l11.8 11.8"
-                />
-              </svg>
+              <component :is="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
             </button>
           </template>
         </AuthInput>
@@ -85,7 +52,7 @@
 
     <!-- 배너 (임시 빈공간) -->
     <div
-      class="mt-10 flex h-[100px] w-[600px] items-center justify-center bg-gray-100 text-gray-400"
+      class="mt-10 flex h-[6.25rem] w-[37.5rem] items-center justify-center bg-gray-100 text-gray-400"
     >
       배너 영역
     </div>
@@ -100,6 +67,9 @@ import { loginApi } from '@/api/user'
 import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import AuthFooterLinks from '@/pages/auth/_components/AuthFooterLinks.vue'
+import eyeOpenIcon from '@/assets/image/icons/eyeOpenIcon.svg'
+import eyeCloseIcon from '@/assets/image/icons/eyeCloseIcon.svg'
+import mainLogo from '@/assets/image/logo/mainLogo.svg'
 
 const email = ref('')
 const password = ref('')

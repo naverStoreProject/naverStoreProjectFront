@@ -39,7 +39,7 @@
 
     <!-- 배너 (임시 빈공간) -->
     <div
-      class="mt-10 flex h-[100px] w-[600px] items-center justify-center bg-gray-100 text-gray-400"
+      class="mt-10 flex h-[6.25rem] w-[37.5rem] items-center justify-center bg-gray-100 text-gray-400"
     >
       배너 영역
     </div>
