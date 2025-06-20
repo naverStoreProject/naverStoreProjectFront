@@ -1,7 +1,11 @@
 <template>
-  <div class="scrollbar-none w-full overflow-x-auto">
-    <div class="shorcut-box">
-      <div v-for="list in shorcutList" class="shortcut-item" @click="clickShortcut(list.name)">
+  <div class="scrollbar-none w-full overflow-x-auto px-3 py-2">
+    <div class="flex gap-2">
+      <div
+        v-for="list in shorcutList"
+        class="relative flex justify-center gap-1 p-1 whitespace-nowrap"
+        @click="clickShortcut(list.name)"
+      >
         <div class="flex flex-col items-center">
           <Icon
             background="trans"
@@ -10,8 +14,9 @@
             size="lg"
             sorting="horizon"
             label=""
+            class="bg-surface-100 rounded-3xl"
           />
-          <div v-text="list.title" class="shortcut-item__text"></div>
+          <div class="pt-1">{{ list.title }}</div>
         </div>
       </div>
     </div>
@@ -38,13 +43,12 @@ const clickShortcut = name => {
   }
 }
 
-// open = [ 'offcanvas', 'paging']
 const shorcutList = [
   { title: '슈퍼적립', open: 'offcanvas', name: 'superCredit' },
   { title: 'N배송', open: 'offcanvas', name: 'delivery' },
   { title: '쇼핑라이브', open: 'offcanvas', name: 'shoppingLive' },
   { title: '패션타운', open: 'offcanvas', name: 'fashionTown' },
-  { title: '장보기', open: 'offcanvas', name: 'market' },
+  // { title: '장보기', open: 'offcanvas', name: 'market' },
   { title: '원쁠딜', open: 'offcanvas', name: 'onePlus' },
   { title: '선물샵', open: 'offcanvas', name: 'giftShop' },
   { title: '쿠폰/혜택', open: 'offcanvas', name: 'couponSale' },
@@ -62,25 +66,11 @@ const shorcutList = [
 .scrollbar-none::webkit-scrollbar {
   display: none;
 }
-
-.shorcut-box {
-  display: flex;
-}
 .shortcut-item {
   display: flex;
   justify-content: center;
   position: relative;
   white-space: nowrap;
   padding: 0.3rem 0.5rem 0.5rem 0.3rem;
-}
-
-.shortcut-item__img {
-  width: 3rem;
-  height: 3rem;
-  border: 1px solid;
-  border-radius: 0.5rem;
-}
-.shortcut-item__text {
-  padding: 0.5rem;
 }
 </style>
