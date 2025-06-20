@@ -5,7 +5,7 @@
       v-if="mainBannerData.length > 0"
       :bullets="false"
       :arrows="false"
-      :autoplay="autoPalying"
+      :autoplay="autoPlaying"
       @autoplay-pause="internalAutoPlaying = false"
       @autoplay-resume="internalAutoPlaying = true"
       :duration="3000"
@@ -22,14 +22,14 @@
       <div class="flex text-center text-white opacity-80">
         <button
           @click="
-            ;(mainBannerSlide as any)?.[`${autoPalying ? 'pause' : 'resume'}Autoplay`]?.()
-            autoPalying = !autoPalying
+            ;(mainBannerSlide as any)?.[`${autoPlaying ? 'pause' : 'resume'}Autoplay`]?.()
+            autoPlaying = !autoPlaying
           "
           class="bg-surface-500 flex cursor-pointer rounded-tl-[1rem] rounded-bl-[1rem] px-[0.2rem] py-[0.1rem] text-[0.4rem] whitespace-nowrap opacity-90"
         >
           &nbsp;<img
             class="brightness-0 invert"
-            :src="autoPalying ? iconsSvg.pauseIcon : iconsSvg.playIcon"
+            :src="autoPlaying ? iconsSvg.pauseIcon : iconsSvg.playIcon"
           />
         </button>
         &nbsp;
@@ -73,7 +73,7 @@ onMounted(async () => {
 
 //슬라이드 변수
 const mainBannerSlide = ref<typeof VueperSlides>()
-const autoPalying = ref(true)
+const autoPlaying = ref(true)
 const internalAutoPlaying = ref(true)
 </script>
 

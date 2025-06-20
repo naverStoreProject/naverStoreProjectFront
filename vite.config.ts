@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
 
   return {
-    plugins: [vue(), vueDevTools(), tailwindcss(), svgLoader()],
+    plugins: [vue(), vueDevTools(), tailwindcss(), svgLoader({ defaultImport: 'url' })],
     resolve: {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
