@@ -1,33 +1,69 @@
 <template>
-  <AuthFormBox title="회원가입">
-    <form @submit.prevent="onRegister" class="space-y-4">
-      <AuthInput v-model="name" placeholder="이름" :error-message="nameError" />
-      <AuthInput v-model="nickname" placeholder="닉네임" :error-message="nicknameError" />
-      <AuthInput v-model="email" type="email" placeholder="이메일" :error-message="emailError" />
-      <AuthInput
-        v-model="password"
-        type="password"
-        placeholder="비밀번호"
-        :error-message="passwordError"
-      />
-      <AuthInput
-        v-model="confirmPassword"
-        type="password"
-        placeholder="비밀번호 확인"
-        :error-message="confirmPasswordError"
-      />
-      <AuthInput v-model="phone" placeholder="전화번호" :error-message="phoneError" />
-      <AuthInput v-model="address" placeholder="주소" :error-message="addressError" />
+  <div class="flex min-h-screen flex-col items-center justify-center bg-white">
+    <!-- 로고 영역 (빈공간) -->
+    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
 
+    <!-- 로그인 박스 -->
+    <div class="w-[400px] rounded-md border bg-white p-8 shadow">
+      <!-- 입력 필드 -->
+      <div class="space-y-4">
+        <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
+        <AuthInput
+          v-model="nickname"
+          type="text"
+          placeholder="별명"
+          :error-message="nicknameError"
+        />
+        <AuthInput v-model="email" type="text" placeholder="이메일" :error-message="emailError" />
+        <AuthInput
+          v-model="password"
+          :type="isPasswordVisible ? 'text' : 'password'"
+          placeholder="비밀번호"
+          :error-message="passwordError"
+        >
+          <template #suffix>
+            <button
+              type="button"
+              class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+              @click="togglePassword"
+            >
+              <component :is="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
+            </button>
+          </template>
+        </AuthInput>
+        <AuthInput
+          v-model="confirmPassword"
+          type="password"
+          placeholder="비밀번호 확인"
+          :error-message="confirmPasswordError"
+        />
+        <AuthInput v-model="phone" type="text" placeholder="전화번호" :error-message="phoneError" />
+        <AuthInput v-model="address" type="text" placeholder="주소" :error-message="addressError" />
+        <div class="text-sm text-gray-600"></div>
+      </div>
+
+      <!-- 로그인 버튼 -->
       <BaseBtn
         :label="isLoading ? '회원가입 중...' : '회원가입'"
         color="primary"
-        size="md"
+        size="lg"
         rounded="lg"
+        class="mt-7 w-full"
         :disabled="isLoading"
+        @click="onRegister"
       />
-    </form>
-  </AuthFormBox>
+    </div>
+
+    <!-- 하단 링크 -->
+    <AuthFooterLinks />
+
+    <!-- 배너 (임시 빈공간) -->
+    <div
+      class="mt-10 flex h-[6.25rem] w-[37.5rem] items-center justify-center bg-gray-100 text-gray-400"
+    >
+      배너 영역
+    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +74,8 @@ import axios from 'axios'
 import AuthFormBox from '@/pages/auth/_components/AuthFormBox.vue'
 import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
+import eyeOpenIcon from '@/assets/image/icons/eyeOpenIcon.svg'
+import eyeCloseIcon from '@/assets/image/icons/eyeCloseIcon.svg'
 
 // 입력값
 const name = ref('')
@@ -47,6 +85,13 @@ const password = ref('')
 const confirmPassword = ref('')
 const phone = ref('')
 const address = ref('')
+
+// 비밀번호 표시/숨김 토글
+const isPasswordVisible = ref(false)
+
+const togglePassword = () => {
+  isPasswordVisible.value = !isPasswordVisible.value
+}
 
 // 에러 메시지
 const nameError = ref('')
