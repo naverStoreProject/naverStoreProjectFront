@@ -28,7 +28,7 @@
 
         <!-- 로그인 버튼 -->
         <BaseBtn
-          :label="isLoading ? '이메일 찾는 중...' : '이메일 찾기'"
+          :label="isLoading ? '이메일 찾는 중....' : '이메일 찾기'"
           color="primary"
           size="lg"
           rounded="lg"
