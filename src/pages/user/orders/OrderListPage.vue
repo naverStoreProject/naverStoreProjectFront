@@ -33,20 +33,34 @@ import { ref, reactive, watchEffect, computed, onMounted } from 'vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import OrderBox from '@/pages/user/_components/OrderBox.vue'
 import {
-  fetchOrderItems,
+  fetchOrderGroups,
+  fetchOrderItemsByOrderId,
   searchOrderItems,
   deleteOrderItem,
   updateOrderItemStatus,
 } from '@/api/user'
-import type { OrderItem } from '@/types/order'
+import type { OrderGroup, OrderItem } from '@/types/order'
 
-const orders = ref<OrderItem[]>([])
+interface FullOrder {
+  group: OrderGroup
+  items: OrderItem[]
+}
+
 const memberId = 1
+const orders = ref<FullOrder[]>([])
 onMounted(async () => {
-  const resp = await fetchOrderItems(memberId)
-  if (resp?.data) {
-    orders.value = resp.data
+  const { data: orderGroups } = await fetchOrderGroups(memberId)
+
+  const results: FullOrder[] = []
+  for (const group of orderGroups) {
+    const { data: items } = await fetchOrderItemsByOrderId(group.id)
+    results.push({
+      group,
+      items,
+    })
   }
+
+  orders.value = results
 })
 
 // 버튼 구성 데이터
@@ -62,28 +76,40 @@ const selectedIdx = ref(0)
 
 // watchEffect로 상태별 count 동기화
 watchEffect(() => {
+  // 배송 완료 금액 → 모든 상품 중 배송 완료 상태인 상품의 총액
+  const deliveryDoneItems = orders.value.flatMap(order =>
+    order.items.filter(item => tabs[1].filterKey!.includes(item.status))
+  )
   tabs[1].count =
     Math.floor(
-      orders.value
-        .filter(order => tabs[1].filterKey!.includes(order.status))
-        .reduce((sum, order) => sum + order.price, 0) * 0.01
+      deliveryDoneItems.reduce((sum, item) => sum + item.price, 0) * 0.01
     ).toLocaleString() + '원'
 
-  tabs[2].count = orders.value.filter(order => tabs[2].filterKey!.includes(order.status)).length
+  // 배송 중 상품 수
+  tabs[2].count = orders.value.reduce(
+    (count, order) =>
+      count + order.items.filter(item => tabs[2].filterKey!.includes(item.status)).length,
+    0
+  )
 
-  tabs[3].count = orders.value.filter(order => tabs[3].filterKey!.includes(order.status)).length
+  // 교환/반품 상품 수
+  tabs[3].count = orders.value.reduce(
+    (count, order) =>
+      count + order.items.filter(item => tabs[3].filterKey!.includes(item.status)).length,
+    0
+  )
 })
 
 // 필터링된 주문 목록 계산 속성
 const filteredOrders = computed(() => {
   const filter = tabs[selectedIdx.value].filterKey
-  if (!filter) return orders.value
-  return orders.value.filter(order => filter.includes(order.status))
+  if (!filter) return orders.value.flatMap(order => order.items) // 전체 상품
+  return orders.value.flatMap(order => order.items.filter(item => filter.includes(item.status)))
 })
 
 function doDelete(orderId: number) {
   deleteOrderItem(orderId).then(() => {
-    orders.value = orders.value.filter(order => order.id !== orderId)
+    orders.value = orders.value.filter(order => order.group.id !== orderId)
   })
 }
 </script>

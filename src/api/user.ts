@@ -7,8 +7,11 @@ export const loginApi = (email: string, password: string) => {
 
 // 주문내역 관련 API 요청
 // 주문내역 조회
-export async function fetchOrderItems(memberId: number) {
-  return await axios.get(`/api/order-item/member/${memberId}`)
+export async function fetchOrderGroups(memberId: number) {
+  return await axios.get(`/api/order-group/member/${memberId}`)
+}
+export async function fetchOrderItemsByOrderId(orderId: number) {
+  return await axios.get(`/api/order-item/order/${orderId}`)
 }
 
 // 주문내역 검색
