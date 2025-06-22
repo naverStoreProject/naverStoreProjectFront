@@ -41,6 +41,7 @@ const routeMap: Record<string, () => Promise<any>> = {
   //user components
   mypage: () => import('@/pages/user/MypageListPage.vue'),
   order: () => import('@/pages/user/orders/OrderListPage.vue'),
+  orderDetail:()=>import('@/pages/user/orders/OrderDetailPage.vue'),
   review: () => import('@/pages/user/orders/ReviewPage.vue'),
   profile: () => import('@/pages/user/profile/ProfilePage.vue'),
   notice: () => import('@/pages/user/notice/NoticeListPage.vue'),
