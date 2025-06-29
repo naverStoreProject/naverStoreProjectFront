@@ -186,7 +186,7 @@ const onRegister = async () => {
       name: name.value,
       nickname: nickname.value,
       email: email.value,
-      pwd: password.value, // 평문 전달
+      password: password.value, // 평문 전달
       phone: phone.value,
       address: address.value,
     }

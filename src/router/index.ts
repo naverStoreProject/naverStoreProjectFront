@@ -4,6 +4,7 @@ import AppLayout from '@/components/layouts/AppLayout.vue'
 import Page404 from '@/pages/notfound/Page404.vue'
 import { routeMap } from '@/router/routeMap'
 import meta from '@/stories/BaseBtn.stories'
+import { decodeToken } from '@/utils/token'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -25,7 +26,7 @@ const routes: RouteRecordRaw[] = [
             name: 'deal-home',
             component: routeMap.todayDeal,
           },
-          { 
+          {
             path: 'for-you',
             name: 'for-you-home',
             component: routeMap.forYou,
@@ -129,26 +130,31 @@ const routes: RouteRecordRaw[] = [
             path: '',
             name: 'mypage',
             component: routeMap.mypage,
+            meta: { requiresAuth: true },
           },
           {
             path: 'orders',
             name: 'orders',
             component: routeMap.order,
+            meta: { requiresAuth: true },
           },
           {
             path: 'orders/review',
             name: 'reviews',
             component: routeMap.review,
+            meta: { requiresAuth: true },
           },
           {
             path: 'orders/review/:orderId',
             name: 'review',
             component: routeMap.review,
+            meta: { requiresAuth: true },
           },
           {
             path: 'profile',
             name: 'profile',
             component: routeMap.profile,
+            meta: { requiresAuth: true },
           },
           {
             path: 'notice',
@@ -180,6 +186,24 @@ const router = createRouter({
     }
     return { top: 0, behavior: 'smooth' }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('jwt')
+
+  if (to.meta.requiresAuth) {
+    if (!token) return next('/login')
+
+    const payload = decodeToken(token)
+    const now = Math.floor(Date.now() / 1000)
+
+    if (!payload || payload.exp < now) {
+      localStorage.removeItem('jwt')
+      return next('/login')
+    }
+  }
+
+  next()
 })
 
 export default router
