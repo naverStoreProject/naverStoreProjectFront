@@ -1,38 +1,43 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
-    <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
-
-    <!-- 로그인 박스 -->
-    <div class="w-[400px] rounded-md border bg-white p-8 shadow">
-      <!-- 탭 (디자인만) -->
-
-      <!-- 입력 필드 -->
-      <div class="space-y-4">
-        <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
-        <AuthInput
-          v-model="nickname"
-          type="text"
-          placeholder="별명"
-          :error-message="nicknameError"
-        />
-        <AuthInput v-model="phone" type="text" placeholder="전화번호" :error-message="phoneError" />
-
-        <div class="text-sm text-gray-600"></div>
+    <div class="flex flex-col items-center space-y-6">
+      <div class="flex justify-center">
+        <img :src="logo.mainLogo" alt="메인 로고" class="block h-auto w-60" />
       </div>
+      <div class="w-90 rounded-md border bg-white p-8 shadow">
+        <!-- 탭 (디자인만) -->
 
-      <!-- 로그인 버튼 -->
-      <BaseBtn
-        :label="isLoading ? '이메일 찾는 중...' : '이메일 찾기'"
-        color="primary"
-        size="lg"
-        rounded="lg"
-        class="mt-7 w-full"
-        :disabled="isLoading"
-        @click="onSubmit"
-      />
+        <!-- 입력 필드 -->
+        <div class="space-y-4">
+          <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
+          <AuthInput
+            v-model="nickname"
+            type="text"
+            placeholder="별명"
+            :error-message="nicknameError"
+          />
+          <AuthInput
+            v-model="phone"
+            type="text"
+            placeholder="전화번호"
+            :error-message="phoneError"
+          />
+
+          <div class="text-sm text-gray-600"></div>
+        </div>
+
+        <!-- 로그인 버튼 -->
+        <BaseBtn
+          :label="isLoading ? '이메일 찾는 중....' : '이메일 찾기'"
+          color="primary"
+          size="lg"
+          rounded="lg"
+          class="mt-7 w-full"
+          :disabled="isLoading"
+          @click="onSubmit"
+        />
+      </div>
     </div>
-
     <!-- 하단 링크 -->
     <AuthFooterLinks />
 
@@ -50,7 +55,7 @@ import { useRouter } from 'vue-router'
 import AuthFormBox from '@/pages/auth/_components/AuthFormBox.vue'
 import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
-
+import logo from '@/assets/image/logo/logo'
 // 실제 axios 요청이 필요한 경우 아래 주석 해제
 // import axios from 'axios'
 
