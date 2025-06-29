@@ -7,7 +7,7 @@ import searchActive from '@/assets/image/tabBar/searchActive.svg'
 import shopping from '@/assets/image/tabBar/shopping.svg'
 import shoppingActive from '@/assets/image/tabBar/shoppingActive.svg'
 
-const tabBarImg = {
+const tabBarIcon = {
   home: home,
   homeActive: homeActive,
   category: category,
@@ -18,4 +18,4 @@ const tabBarImg = {
   shoppingActive: shoppingActive,
 }
 
-export default tabBarImg
+export default tabBarIcon
