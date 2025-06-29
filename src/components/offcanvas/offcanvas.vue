@@ -4,7 +4,7 @@
     :class="{ show: offcanvasStore.isVisible(props.index) }"
   >
     <Header :menu="props.menu" :data="props.data" />
-    <component :is="currentPage" />
+    <component :is="currentPage" :data="props.data" />
   </div>
 </template>
 

@@ -1,32 +1,36 @@
 <template>
   <div :class="['product-card', viewType]" v-if="product">
-    <img :src="product.image" alt="이미지 없음" />
+    <img :src="product.thumbnailUrl" alt="이미지 없음" />
     <div class="product-info">
       <div class="meta-row">
         <template v-if="viewType === 'small'">
           <p class="tag-name-line">
-            <span class="tag-text-wrapper" v-if="product.adTag">
-              <span class="tag-text">광고</span>&nbsp;
-            </span>{{ product.name }}
+<!--            <span class="tag-text-wrapper" v-if="product.adTag">-->
+<!--              <span class="tag-text">광고</span>&nbsp;-->
+<!--            </span>-->
+            {{ product.name }}
           </p>
         </template>
         <template v-else>
           <p class="brand-ad-tag-line">
             <span class="brand">{{ product.brand }} </span>
-            <span class="ad-tag" v-if="product.adTag">광고</span>
+<!--            <span class="ad-tag" v-if="product.adTag">광고</span>-->
           </p>
           <p class="name">{{ product.name }}</p>
         </template>
       </div>
 
-      <p class="price" v-if="product.originalPrice">
-        <span v-if="viewType !== 'small'" class="my-price">나의 할인가 </span>
-        <span class="original">{{ product.originalPrice }}원</span>
+      <p class="price" v-if="product.discountRate > 0">
+        <span class="canceled">{{ product.originalPrice }}원</span>
       </p>
-      <p class="price">
-        <span class="discount-rate" v-if="product.discountRate">{{ product.discountRate }}</span> &nbsp;
-        <span class="current">{{ product.currentPrice }}원</span>
+      <p class="price" v-if="product.discountRate > 0">
+        <span class="discount-rate">{{ product.discountRate }}%</span> &nbsp;
+        <span class="current">{{ product.discountPrice }}원</span>
       </p>
+      <p class="price" v-else>
+        <span class="current">{{ product.originalPrice }}원</span>
+      </p>
+
 
       <p class="rating" v-if="viewType === 'small' && product.averageRating && product.ratingCount">
         ⭐ {{ product.averageRating }} ({{ product.ratingCount }})
@@ -106,11 +110,12 @@ const props = defineProps<{
   font-weight: bold;
 }
 
-.original {
+.canceled {
   font-size: 12px;
   color: #aaa;
   text-decoration: line-through;
 }
+
 
 .meta-row {
   align-items: center;
