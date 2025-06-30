@@ -7,18 +7,20 @@
           {{ formattedDate }} 자동 구매확정 예정
         </span>
       </div>
-      <img :src="CloseIcon" alt="삭제버튼" class="cursor-pointer" @click="doDelete" />
+      <img :src="CloseIcon" alt="삭제버튼" class="cursor-pointer" @click="doDeleteOrder" />
     </div>
     <div class="flex gap-6">
       <img
         class="aspect-square w-32 cursor-pointer rounded-lg"
-        :src="order.productImage"
+        :src="order.image"
         alt="상품이미지"
         @click="gotoDetail"
       />
       <div class="flex w-full flex-col gap-1">
-        <span class="text-surface-300 font-gmarket-light">{{ order.statusChangedDate }} </span>
-        <span class="cursor-pointer" @click="gotoDetail">{{ order.productName }}</span>
+        <span class="text-surface-300 font-gmarket-light"
+          >{{ formatOrderTime(order.orderTime) }} 주문
+        </span>
+        <span class="cursor-pointer" @click="gotoDetail">{{ order.title }}</span>
         <span class="font-gmarket-bold flex items-center text-lg">
           {{ order.price.toLocaleString() }}원
           <img :src="NpayIcon" alt="네이버페이" class="ml-1 h-8 w-auto" />
@@ -64,12 +66,7 @@ import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import NpayIcon from '@/assets/image/shortcut/delivery.png'
 import CloseIcon from '@/assets/image/icons/closeIcon.svg'
 import type { OrderItem } from '@/types/order'
-import {
-  fetchOrderItems,
-  searchOrderItems,
-  deleteOrderItem,
-  updateOrderItemStatus,
-} from '@/api/user'
+import { orderApi } from '@/api/user'
 
 const props = defineProps<{ order: OrderItem }>()
 const router = useRouter()
@@ -84,12 +81,6 @@ const gotoQna = () => {
   router.push(`/qna?company=${props.order.company}&orderId=${props.order.id}`)
 }
 
-function doDelete() {
-  deleteOrderItem(props.order.id)
-    .then(() => console.log('주문 삭제 완료'))
-    .catch(console.error)
-}
-
 // 상태 업데이트
 function handleAction(action: string) {
   const statusMap: Record<string, string> = {
@@ -101,35 +92,7 @@ function handleAction(action: string) {
     '반품 완료': '반품완료',
     '교환 완료': '교환완료',
   }
-
-  const nextStatus = statusMap[action]
-  if (nextStatus) {
-    updateOrderItemStatus(props.order.id, nextStatus)
-      .then(() => console.log(`%{nextStatus} 상태로 업데이트 완료`))
-      .catch(console.error)
-  }
 }
-
-// 구매확정 예정일 계산 함수
-const autoConfirmDate = (status: string, statusChangedAt: string) => {
-  const confirmDate = new Date(statusChangedAt)
-  confirmDate.setDate(confirmDate.getDate() + 7)
-
-  const today = new Date()
-  const isBefore = status === '배송완료' && confirmDate > today
-  const formattedDate = `${confirmDate.getMonth() + 1}.${confirmDate.getDate()}(${['일', '월', '화', '수', '목', '금', '토'][confirmDate.getDay()]})`
-
-  return {
-    isBeforeAutoConfirm: isBefore,
-    formattedDate,
-  }
-}
-
-// 자동 구매확정 예정일 사용
-const { isBeforeAutoConfirm, formattedDate } = autoConfirmDate(
-  props.order.status,
-  props.order.statusChangedDate
-)
 
 // 주문 상태에 따라 버튼 구성
 const buttonsByStatus = computed(() => {
@@ -141,5 +104,45 @@ const buttonsByStatus = computed(() => {
     return ['한달사용리뷰', '장바구니 담기', '바로 구매하기']
   }
   return []
+})
+
+function formatOrderTime(time: string) {
+  if (!time) return ''
+  const date = new Date(time)
+  return date.toLocaleString('ko-KR', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
+}
+
+// 주문 삭제
+async function doDeleteOrder() {
+  if (!confirm('정말로 이 주문을 삭제하시겠습니까?')) {
+    return
+  }
+  try {
+    await orderApi.deleteOrderItem(props.order.id)
+    location.reload()
+  } catch (err) {
+    console.error('주문 삭제에 실패했습니다.', err)
+  }
+}
+
+// 구매확정일 계산
+const isBeforeAutoConfirm = computed(() => {
+  const autoConfirmDate = new Date(props.order.orderTime)
+  autoConfirmDate.setDate(autoConfirmDate.getDate() + 7) // 주문 후 7일 후
+  return new Date() < autoConfirmDate
+})
+const formattedDate = computed(() => {
+  const autoConfirmDate = new Date(props.order.orderTime)
+  autoConfirmDate.setDate(autoConfirmDate.getDate() + 7) // 주문 후 7일 후
+  return autoConfirmDate.toLocaleDateString('ko-KR', {
+    month: '2-digit',
+    day: '2-digit',
+  })
 })
 </script>

@@ -1,4 +1,6 @@
-import axios from 'axios'
+import type { ApiResponse } from '@/types/api'
+import type { OrderItem } from '@/types/order'
+import axios, { type AxiosResponse } from 'axios'
 
 // 로그인 API 요청
 export const loginApi = (email: string, password: string) => {
@@ -6,30 +8,54 @@ export const loginApi = (email: string, password: string) => {
 }
 
 // 주문내역 관련 API 요청
-// 주문내역 조회
-export async function fetchOrderGroups(memberId: number) {
-  return await axios.get(`/api/order-group/member/${memberId}`)
-}
-export async function fetchOrderItemsByOrderId(orderId: number) {
-  return await axios.get(`/api/order-item/order/${orderId}`)
-}
+const accessToken = import.meta.env.VITE_ACCESS_TOKEN
 
-// 주문내역 검색
-export async function searchOrderItems(memberId: number, keyword: string) {
-  const { data } = await axios.get('/api/order-item/search', {
-    params: { memberId, keyword },
-  })
-  return data
-}
+export const orderApi = {
+  // 주문내역 조회
+  getMyOrders: async (): Promise<ApiResponse<OrderItem[]>> => {
+    try {
+      const apiUrl = '/api/order'
+      const response: AxiosResponse<ApiResponse<OrderItem[]>> = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      return response.data
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
 
-// 주문내역 삭제
-export async function deleteOrderItem(id: number) {
-  return await axios.delete(`/api/order-items/${id}`)
-}
+  // 주문 상세 조회
+  getOrderById: async (orderId: number): Promise<ApiResponse<OrderItem>> => {
+    try {
+      const apiUrl = `/api/order/${orderId}`
+      const response: AxiosResponse<ApiResponse<OrderItem>> = await axios.get(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      return response.data
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
 
-// 주문내역 상태 업데이트
-export async function updateOrderItemStatus(id: number, status: string) {
-  await axios.put(`/api/order-item/status`, null, {
-    params: { id, status },
-  })
+  // 주문 삭제
+  deleteOrderItem: async (orderId: number): Promise<ApiResponse<void>> => {
+    try {
+      const apiUrl = `/api/order/${orderId}`
+      const response: AxiosResponse<ApiResponse<void>> = await axios.delete(apiUrl, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      return response.data
+    } catch (err) {
+      console.error(err)
+      throw err
+    }
+  },
 }

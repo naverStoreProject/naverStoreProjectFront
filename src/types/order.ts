@@ -12,19 +12,20 @@ export type OrderItemStatus =
 export interface OrderGroup {
   id: number
   memberId: number
-  orderDate: string
 }
 
 // OrderItem 타입
 export interface OrderItem {
   id: number
-  sequence: number
-  orderId: number
-  status: OrderItemStatus
-  productImage: string
-  productName: string
+  orderGroupId: number
+  title: string
+  detail: string
+  image: string
+  count: number
   price: number
+  link: string
+  orderTime: string
+  status: OrderItemStatus
+  statusChangedTime: string
   company: string
-  statusChangedDate: string
-  productLink: string
 }
