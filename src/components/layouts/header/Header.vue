@@ -32,6 +32,13 @@
         >
           <i class="fa-regular fa-bell"></i>
         </div>
+        <div
+          v-if="routeMenuList.searching"
+          class="header-right__searching"
+          @click="navigateToSearchResult"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </div>
         <div v-if="routeMenuList.setting" class="header-right__alarm">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24" class="_headerControl_icon_EaQfx">
             <path stroke="currentColor" stroke-width="1.5" d="M15.359 12.032c0 1.806-1.48 3.27-3.31 3.27s-3.31-1.464-3.31-3.27 1.48-3.27 3.31-3.27 3.31 1.464 3.31 3.27z" clip-rule="evenodd"></path>
