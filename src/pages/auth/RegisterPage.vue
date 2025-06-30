@@ -1,57 +1,70 @@
 <template>
   <div class="flex min-h-screen flex-col items-center justify-center bg-white">
-    <!-- 로고 영역 (빈공간) -->
-    <div class="mb-10 text-4xl font-bold text-green-600">NaverStore</div>
-
-    <!-- 로그인 박스 -->
-    <div class="w-[400px] rounded-md border bg-white p-8 shadow">
-      <!-- 입력 필드 -->
-      <div class="space-y-4">
-        <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
-        <AuthInput
-          v-model="nickname"
-          type="text"
-          placeholder="별명"
-          :error-message="nicknameError"
-        />
-        <AuthInput v-model="email" type="text" placeholder="이메일" :error-message="emailError" />
-        <AuthInput
-          v-model="password"
-          :type="isPasswordVisible ? 'text' : 'password'"
-          placeholder="비밀번호"
-          :error-message="passwordError"
-        >
-          <template #suffix>
-            <button
-              type="button"
-              class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
-              @click="togglePassword"
-            >
-              <component :is="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
-            </button>
-          </template>
-        </AuthInput>
-        <AuthInput
-          v-model="confirmPassword"
-          type="password"
-          placeholder="비밀번호 확인"
-          :error-message="confirmPasswordError"
-        />
-        <AuthInput v-model="phone" type="text" placeholder="전화번호" :error-message="phoneError" />
-        <AuthInput v-model="address" type="text" placeholder="주소" :error-message="addressError" />
-        <div class="text-sm text-gray-600"></div>
+    <div class="flex flex-col items-center space-y-6">
+      <div class="flex justify-center">
+        <img :src="logo.mainLogo" alt="메인 로고" class="block h-auto w-60" />
       </div>
+      <div class="w-90 rounded-md border bg-white p-8 shadow">
+        <!-- 탭 (디자인만) -->
 
-      <!-- 로그인 버튼 -->
-      <BaseBtn
-        :label="isLoading ? '회원가입 중...' : '회원가입'"
-        color="primary"
-        size="lg"
-        rounded="lg"
-        class="mt-7 w-full"
-        :disabled="isLoading"
-        @click="onRegister"
-      />
+        <!-- 입력 필드 -->
+        <div class="space-y-4">
+          <AuthInput v-model="name" type="text" placeholder="이름" :error-message="nameError" />
+          <AuthInput
+            v-model="nickname"
+            type="text"
+            placeholder="별명"
+            :error-message="nicknameError"
+          />
+          <AuthInput v-model="email" type="text" placeholder="이메일" :error-message="emailError" />
+          <AuthInput
+            v-model="password"
+            :type="isPasswordVisible ? 'text' : 'password'"
+            placeholder="비밀번호"
+            :error-message="passwordError"
+          >
+            <template #suffix>
+              <button
+                type="button"
+                class="absolute top-1/2 right-3 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                @click="togglePassword"
+              >
+                <img :src="isPasswordVisible ? eyeOpenIcon : eyeCloseIcon" class="h-5 w-5" />
+              </button>
+            </template>
+          </AuthInput>
+          <AuthInput
+            v-model="confirmPassword"
+            type="password"
+            placeholder="비밀번호 확인"
+            :error-message="confirmPasswordError"
+          />
+          <AuthInput
+            v-model="phone"
+            type="text"
+            placeholder="전화번호"
+            :error-message="phoneError"
+          />
+          <AuthInput
+            v-model="address"
+            type="text"
+            placeholder="주소"
+            :error-message="addressError"
+          />
+          <div class="text-sm text-gray-600"></div>
+        </div>
+
+        <!-- 로그인 버튼 -->
+        <BaseBtn
+          :label="isLoading ? '회원가입 중...' : '회원가입'"
+          color="primary"
+          size="lg"
+          rounded="lg"
+          class="mt-7 w-full"
+          :disabled="isLoading"
+          @click="onRegister"
+        />
+      </div>
     </div>
 
     <!-- 하단 링크 -->
@@ -76,7 +89,7 @@ import AuthInput from '@/pages/auth/_components/AuthInput.vue'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import eyeOpenIcon from '@/assets/image/icons/eyeOpenIcon.svg'
 import eyeCloseIcon from '@/assets/image/icons/eyeCloseIcon.svg'
-
+import logo from '@/assets/image/logo/logo'
 // 입력값
 const name = ref('')
 const nickname = ref('')
@@ -178,7 +191,7 @@ const onRegister = async () => {
       address: address.value,
     }
 
-    await axios.post('/api/auth/register', payload)
+    await axios.post('/api/member/register', payload)
     alert('회원가입이 완료되었습니다.')
     router.push('/login')
   } catch (error) {

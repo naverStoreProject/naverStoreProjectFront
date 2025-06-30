@@ -56,4 +56,3 @@ const props = defineProps<{
   transform: translateX(0);
 }
 </style>
-

@@ -1,11 +1,18 @@
 <template>
-  <div class="flex flex-col min-h-screen">
-    <main class="flex-1 pb-20 relative ...">
+  <div class="flex min-h-screen flex-col">
+    <main class="relative flex-1 pb-20 ...">
       <RouterView />
       <TabBar />
     </main>
   </div>
-  <Offcanvas v-for="(item, index) in offcanvasStore.stack" :key="index" :menu="item.routeType" :data="item.data" :index="index">
+  <Offcanvas
+    v-for="(item, index) in offcanvasStore.stack"
+    :key="index"
+    :menu="item.routeType"
+    :data="item.data"
+    :index="index"
+    class="z-20"
+  >
   </Offcanvas>
 </template>
 
