@@ -191,7 +191,7 @@ const onRegister = async () => {
       address: address.value,
     }
 
-    await axios.post('/api/auth/register', payload)
+    await axios.post('/api/member/register', payload)
     alert('회원가입이 완료되었습니다.')
     router.push('/login')
   } catch (error) {

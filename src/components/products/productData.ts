@@ -1,40 +1,40 @@
-////////////////// Product 2 /////////////////////
-
-export interface Product2 {
-  id: number
-  brand: string
-  name: string
-  image: string
-  description: string
-  stockQuantity: number
-  originalPrice: number
-  discountRate: number
-  currentPrice: number
-  averageRating: number
-  ratingCount: number
-  category: number
-}
-
-
-
-
-
 ////////////////// Product 1 /////////////////////
 
 export interface Product {
-  id: string              // Number
+  id: number;               // 제품 아이디
+  name: string;             // 제품명
+  brand: string;            // 브랜드명
+  thumbnailUrl: string;     // 썸네일 url
+  description?: string;     // 제품 설명란
+  mainCategory: number;     // 메인 카테고리 id (1~20)
+  subCategory: number;      // 서브 카테고리 id
+  originalPrice: number;    // 원래 가격
+  discountRate: number;     // 할인율
+  discountPrice: number;    // 할인 가격
+  stockQuantity: number;    // 재고량
+  averageRating: number;    // 평균 평점 (0.0 ~ 5.0)
+  ratingCount: number;      // 평점을 매긴 고객 수
+  createdAt: string;        // (제품 정보) 생성일 - DB insert 기준
+}
+
+
+////////////////// Product 2 /////////////////////
+
+export interface Product2 {
+  id: string
   brand: string
   name: string
   image: string
-  originalPrice?: string  // Number
-  currentPrice: string    // Number
-  discountRate?: string   // Number
+  originalPrice?: string
+  discountRate?: string
+  currentPrice?: string
   adTag: boolean
-  averageRating: string   // Number
-  ratingCount: string     // Number
+  averageRating: string
+  ratingCount: string
 }
 
-export const products: Product[] = [
+
+export const products: Product2[] = [
   {
     id: "prod-001",
     brand: "브랜드명",

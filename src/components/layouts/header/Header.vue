@@ -17,7 +17,8 @@
             placeholder="상품명 또는 브랜드 입력"
             class="flex-1 border-b p-2 outline-none"
             v-model="searchKeyword"
-            @keyup.enter="openSearchOffCanvas"
+            @keyup.enter="navigateToSearchResult"
+            @click="navigateToSearchInput"
           />
         </div>
       </div>
@@ -30,6 +31,13 @@
           @click="offcanvasStore.open('alarm')"
         >
           <i class="fa-regular fa-bell"></i>
+        </div>
+        <div
+          v-if="routeMenuList.searching"
+          class="header-right__searching"
+          @click="navigateToSearchResult"
+        >
+          <i class="fa-solid fa-magnifying-glass"></i>
         </div>
         <div v-if="routeMenuList.setting" class="header-right__alarm">
           <svg width="24" height="24" fill="none" viewBox="0 0 24 24" class="_headerControl_icon_EaQfx">
@@ -56,7 +64,7 @@
   2. 특정 path값을 props 를 통해 주입시켰을때 (우선)
 */
 import { useRoute, useRouter } from 'vue-router'
-import { ref, watch } from 'vue'
+import { ref, watch, onMounted } from 'vue'
 import routeUtil from '@/utils/route'
 
 import type { routeType } from './header'
@@ -74,6 +82,13 @@ const routeMenuList = ref({ ...menuList })
 const routeMainTitleList = ref({ ...mainTitleList })
 const searchKeyword = ref('')
 
+onMounted(() => {
+  if (props.data !== undefined) {
+    searchKeyword.value = String(props.data);
+  }
+});
+
+
 //뒤로가기 버튼 설정
 const backBtnFunc = () => {
   //오프캔버스면 창닫기
@@ -84,22 +99,25 @@ const backBtnFunc = () => {
   }
 }
 
-const openSearchOffCanvas = () => {
+// 검색 입력 페이지에서 검색어 입력 후 enter -> 검색 결과 페이지로 이동
+const navigateToSearchResult  = () => {
   if(props.menu == 'searchInput') {
-    // props로 searchKeyword 전달 필요
-    offcanvasStore.open('searchResult')
-    return
-  }
-  if(props.menu == 'searchResult') {
-    // props로 searchKeyword 전달 필요
-    offcanvasStore.open('searchInput')
+    offcanvasStore.open('searchResult', searchKeyword.value)
     return
   }
 }
 
+// 검색 결과 페이지에서 검색창 click -> 검색 입력 페이지로 이동
+const navigateToSearchInput  = () => {
+  if (props.menu === 'searchResult') {
+    offcanvasStore.open('searchInput', searchKeyword.value);
+  }
+};
+
 //header 강제
 const props = defineProps<{
   menu: routeType
+  data?: any
 }>()
 
 //헤더 리셋
@@ -128,6 +146,8 @@ const checkMainTitle = (name: string = 'home') => {
     mainTitle.value = ''
   }
 }
+
+
 
 //route가 바뀔때마다 실행
 watch(

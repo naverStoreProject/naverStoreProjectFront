@@ -29,5 +29,10 @@ const routerList = {
 }
 type routeType = keyof typeof routerList
 
-export type { routeType }
+type OffcanvasData = {
+  routeType: routeType
+  data?: any
+}
+
+export type { routeType, OffcanvasData }
 export { menuList, mainTitleList, routerList }
