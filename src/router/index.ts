@@ -136,6 +136,12 @@ const routes: RouteRecordRaw[] = [
             component: routeMap.order,
           },
           {
+            path:'orders/:orderId',
+            name:'orderDetail',
+            component: routeMap.orderDetail,
+            // props: true,
+          },
+          {
             path: 'orders/review',
             name: 'reviews',
             component: routeMap.review,

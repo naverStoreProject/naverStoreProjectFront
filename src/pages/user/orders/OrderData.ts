@@ -36,7 +36,7 @@ export const orderedList: OrderItem[] = [
     statusChangedAt: '2025-06-03T08:00:00',
     image: 'https://placehold.co/300x300',
     title: '쿨링 젤 매트 Q 사이즈',
-    date: '6.3. 08:00 주문',
+    date: '2025-05-28T09:13:00',
     price: 58000,
     company: 'coolgel',
   },

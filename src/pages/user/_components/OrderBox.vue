@@ -7,7 +7,7 @@
           {{ formattedDate }} 자동 구매확정 예정
         </span>
       </div>
-      <img :src="CloseIcon" alt="삭제버튼" class="cursor-pointer" @click="doDelete" />
+      <img :src="CloseIcon" alt="삭제버튼" class="cursor-pointer" @click="doDeleteOrder" />
     </div>
     <div class="flex gap-6">
       <img
@@ -17,7 +17,9 @@
         @click="gotoDetail"
       />
       <div class="flex w-full flex-col gap-1">
-        <span class="text-surface-300 font-gmarket-light">{{ order.date }} </span>
+        <span class="text-surface-300 font-gmarket-light"
+          >{{ formatOrderTime(order.orderTime) }} 주문
+        </span>
         <span class="cursor-pointer" @click="gotoDetail">{{ order.title }}</span>
         <span class="font-gmarket-bold flex items-center text-lg">
           {{ order.price.toLocaleString() }}원
@@ -46,6 +48,7 @@
             ? 'border-secondary-500 font-gmarket-bold text-secondary-500'
             : 'border-surface-300',
         ]"
+        @click="() => handleAction(btn)"
       />
       <div
         class="border-surface-300 flex aspect-square w-12 items-center justify-center rounded-sm border text-center"
@@ -62,57 +65,84 @@ import { useRouter } from 'vue-router'
 import BaseBtn from '@/components/buttons/BaseBtn.vue'
 import NpayIcon from '@/assets/image/shortcut/delivery.png'
 import CloseIcon from '@/assets/image/icons/closeIcon.svg'
-import type { OrderItem } from '../orders/OrderData'
+import type { OrderItem } from '@/types/order'
+import { orderApi } from '@/api/user'
 
 const props = defineProps<{ order: OrderItem }>()
 const router = useRouter()
 
 // 상세 페이지로 이동
 const gotoDetail = () => {
-  console.log('상세 페이지로 이동:', props.order.id)
-  // router.push({ name: 'mypage' })
+  router.push(`/orders/${props.order.id}`)
 }
 
 // 문의 페이지로 이동
 const gotoQna = () => {
-  console.log('문의 페이지로 이동:', props.order.company)
-  // router.push({ name: 'mypage' })
+  router.push(`/qna?company=${props.order.company}&orderId=${props.order.id}`)
 }
 
-function doDelete() {
-  // 삭제 로직 구현
-  console.log('주문 삭제:', props.order.id)
-}
-
-// 구매확정 예정일 계산 함수
-const autoConfirmDate = (status: string, statusChangedAt: string) => {
-  const confirmDate = new Date(statusChangedAt)
-  confirmDate.setDate(confirmDate.getDate() + 7)
-
-  const today = new Date()
-  const isBefore = status === '배송 완료' && confirmDate > today
-  const formattedDate = `${confirmDate.getMonth() + 1}.${confirmDate.getDate()}(${['일', '월', '화', '수', '목', '금', '토'][confirmDate.getDay()]})`
-
-  return {
-    isBeforeAutoConfirm: isBefore,
-    formattedDate,
+// 상태 업데이트
+function handleAction(action: string) {
+  const statusMap: Record<string, string> = {
+    '주문 완료': '주문완료',
+    '상품 준비 중': '상품준비중',
+    '배송 중': '배송중',
+    '배송 완료': '배송완료',
+    '구매 확정': '구매확정',
+    '반품 완료': '반품완료',
+    '교환 완료': '교환완료',
   }
 }
-// 자동 구매확정 예정일 사용
-const { isBeforeAutoConfirm, formattedDate } = autoConfirmDate(
-  props.order.status,
-  props.order.statusChangedAt
-)
 
 // 주문 상태에 따라 버튼 구성
 const buttonsByStatus = computed(() => {
   const status = props.order.status
-  if (status === '배송 완료' || status === '배송 중') {
+  if (status === '배송완료' || status === '배송중') {
     return ['구매확정', '반품요청', '교환요청']
   }
-  if (status === '구매확정완료') {
+  if (status === '구매확정') {
     return ['한달사용리뷰', '장바구니 담기', '바로 구매하기']
   }
   return []
+})
+
+function formatOrderTime(time: string) {
+  if (!time) return ''
+  const date = new Date(time)
+  return date.toLocaleString('ko-KR', {
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: false,
+  })
+}
+
+// 주문 삭제
+async function doDeleteOrder() {
+  if (!confirm('정말로 이 주문을 삭제하시겠습니까?')) {
+    return
+  }
+  try {
+    await orderApi.deleteOrderItem(props.order.id)
+    location.reload()
+  } catch (err) {
+    console.error('주문 삭제에 실패했습니다.', err)
+  }
+}
+
+// 구매확정일 계산
+const isBeforeAutoConfirm = computed(() => {
+  const autoConfirmDate = new Date(props.order.orderTime)
+  autoConfirmDate.setDate(autoConfirmDate.getDate() + 7) // 주문 후 7일 후
+  return new Date() < autoConfirmDate
+})
+const formattedDate = computed(() => {
+  const autoConfirmDate = new Date(props.order.orderTime)
+  autoConfirmDate.setDate(autoConfirmDate.getDate() + 7) // 주문 후 7일 후
+  return autoConfirmDate.toLocaleDateString('ko-KR', {
+    month: '2-digit',
+    day: '2-digit',
+  })
 })
 </script>
