@@ -9,10 +9,20 @@ export const useUserStore = defineStore('user', {
 
   actions: {
     async login(email: string, password: string) {
+      console.log('login 함수 진입')
       try {
-        const res = await axios.post('/api/login', { email, password })
+        console.log('axios 요청 전:', email, password)
+        const res = await axios.post('/api/login', { email, pwd: password })
+        console.log('axios 응답:', res)
 
-        this.token = res.data.data.accessToken
+        const accessToken = res.data.data?.accessToken
+        console.log('accessToken:', accessToken)
+        if (!accessToken) {
+          console.error('Login failed: accessToken is missing', res)
+          return false
+        }
+        console.log(accessToken)
+        this.token = accessToken
         this.user = null
 
         // JWT 토큰을 localStorage에 저장
@@ -44,6 +54,16 @@ export const useUserStore = defineStore('user', {
       if (savedToken) {
         this.token = savedToken
         axios.defaults.headers.common['Authorization'] = `Bearer ${savedToken}`
+      }
+    },
+
+    async fetchUserInfo() {
+      try {
+        const res = await axios.get('/api/member/me')
+        this.user = res.data.data // 서버에서 내려준 유저 정보
+      } catch (err) {
+        console.error('Failed to fetch user info', err)
+        this.user = null
       }
     },
   },

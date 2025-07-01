@@ -20,8 +20,9 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { useUserStore } from '@/stores/user'
 
 const userStore = useUserStore()
-const userName = userStore.user?.name || null
+const userName = computed(() => userStore.user?.name || null)
 </script>

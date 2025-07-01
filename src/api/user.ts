@@ -2,6 +2,11 @@ import axios from 'axios'
 
 // 로그인 API 요청
 export const loginApi = async (email: string, password: string) => {
-  const response = await axios.post('/api/login', { email, password: password })
+  const response = await axios.post('/api/login', { email, pwd: password })
+  return response.data
+}
+// 현재 로그인한 사용자 정보 가져오기
+export const fetchUserInfoApi = async () => {
+  const response = await axios.get('/api/member/me')
   return response.data
 }

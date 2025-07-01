@@ -6,4 +6,14 @@
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+
+const userStore = useUserStore()
+
+onMounted(async () => {
+  userStore.restoreToken()
+  await userStore.fetchUserInfo()
+})
+</script>

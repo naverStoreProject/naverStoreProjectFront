@@ -125,11 +125,14 @@ const onLogin = async () => {
 
   isLoading.value = true
   try {
-    const res = await loginApi(email.value, password.value)
-    const token = res.data.data.accessToken
-    localStorage.setItem('token', token)
+    const success = await userStore.login(email.value, password.value)
     isLoading.value = false
-    router.push('/')
+
+    if (success) {
+      router.push('/')
+    } else {
+      passwordError.value = '이메일 또는 비밀번호가 잘못되었습니다.'
+    }
   } catch (err) {
     isLoading.value = false
     console.error('로그인 실패:', err)

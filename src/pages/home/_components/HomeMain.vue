@@ -1,7 +1,7 @@
 <template>
   <!-- 광고 미정 -->
   <div class="news">
-    <template v-for="mb in mbData" :key=mb.id>
+    <template v-for="mb in mbData" :key="mb.id">
       <MainBanner :MainBanner="mb"></MainBanner>
     </template>
   </div>
@@ -21,6 +21,9 @@
 </template>
 
 <script setup lang="ts">
+import { computed, ref, onMounted } from 'vue'
+import { useUserStore } from '@/stores/user'
+
 import LoginWideBanner from '@/components/layouts/LoginBarBanner.vue'
 import MainShortcutBar from '@/components/layouts/MainShortcutBar.vue'
 import HomeInterest from './HomeInterest.vue'
@@ -28,13 +31,13 @@ import HomeTodaySale from './HomeTodaySale.vue'
 
 import mainBannerApi from '@/api/mainBanner.ts'
 import MainBanner from './MainBanner.vue'
-
-import { ref, onMounted } from 'vue'
 import type { MainBannerType } from '@/types/mainBanner.ts'
+
+const userStore = useUserStore()
+const isLogin = computed(() => !!userStore.user)
 
 const mbData = ref<MainBannerType[]>([])
 
-//데이터 가져오기
 onMounted(async () => {
   try {
     const response = await mainBannerApi.getAllbanners()
@@ -47,9 +50,6 @@ onMounted(async () => {
     console.log(error)
   }
 })
-
-//임시 로그인
-const isLogin = true
 </script>
 
 <style>
